@@ -386,22 +386,68 @@
                     {"quarter": "2026-Q2", "Cattle (Thousand)": 2484.9, "Tonnes (Thousand)": 777.2}
                 ]
             },
-            "layer": [
+            "transform": [
                 {
-                    "mark": {"type": "bar", "cornerRadiusEnd": 3, "color": "#CC79A7", "opacity": 0.7},
+                    "window": [
+                        {"op": "lag", "field": "Cattle (Thousand)", "as": "prev_cattle"},
+                        {"op": "lag", "field": "Tonnes (Thousand)", "as": "prev_tonnes"}
+                    ],
+                    "sort": [{"field": "quarter"}]
+                },
+                {
+                    "calculate": "datum.prev_cattle == null ? 0 : round(((datum['Cattle (Thousand)'] - datum.prev_cattle) / datum.prev_cattle) * 1000) / 10",
+                    "as": "cattle_qoq"
+                },
+                {
+                    "calculate": "datum.prev_cattle == null ? 'Base' : (datum.cattle_qoq > 0 ? '+' + datum.cattle_qoq + '%' : datum.cattle_qoq + '%')",
+                    "as": "cattle_label"
+                },
+                {
+                    "calculate": "datum.prev_tonnes == null ? 0 : round(((datum['Tonnes (Thousand)'] - datum.prev_tonnes) / datum.prev_tonnes) * 1000) / 10",
+                    "as": "tonnes_qoq"
+                },
+                {
+                    "calculate": "datum.prev_tonnes == null ? 'Base' : (datum.tonnes_qoq > 0 ? '+' + datum.tonnes_qoq + '%' : datum.tonnes_qoq + '%')",
+                    "as": "tonnes_label"
+                }
+            ],
+            "layer": [
+                /* Layer 1: Bar Chart for Cattle Slaughter */
+                {
+                    "mark": {"type": "bar", "cornerRadiusEnd": 3, "color": "#CC79A7", "opacity": 0.65},
                     "encoding": {
                         "x": {"field": "quarter", "type": "ordinal", "axis": {"title": "Quarter", "labelAngle": -30}},
                         "y": {
                             "field": "Cattle (Thousand)",
                             "type": "quantitative",
+                            "scale": {"domain": [0, 3000]},
                             "axis": {"title": "Cattle Slaughter ('000 Head)", "titleColor": "#CC79A7"}
                         },
                         "tooltip": [
                             {"field": "quarter", "type": "nominal", "title": "Quarter"},
-                            {"field": "Cattle (Thousand)", "type": "quantitative", "title": "Cattle ('000 Head)"}
+                            {"field": "Cattle (Thousand)", "type": "quantitative", "title": "Slaughter ('000 Head)"},
+                            {"field": "cattle_label", "type": "nominal", "title": "Slaughter QoQ"}
                         ]
                     }
                 },
+                /* Layer 2: Text Annotations for Cattle Slaughter QoQ */
+                {
+                    "mark": {
+                        "type": "text",
+                        "align": "center",
+                        "baseline": "bottom",
+                        "dy": -4,
+                        "fontSize": 9,
+                        "fontWeight": "bold",
+                        "color": "#882255"
+                    },
+                    "encoding": {
+                        "x": {"field": "quarter", "type": "ordinal"},
+                        "y": {"field": "Cattle (Thousand)", "type": "quantitative"},
+                        "text": {"field": "cattle_label", "type": "nominal"}
+                    }
+                },
+                /* Layer 3: Line Chart for Beef Production Tonnage */
                 {
                     "mark": {"type": "line", "strokeWidth": 3, "color": "#009E73", "point": true},
                     "encoding": {
@@ -409,47 +455,36 @@
                         "y": {
                             "field": "Tonnes (Thousand)",
                             "type": "quantitative",
-                            "scale": {"domain": [0, 2500]},
+                            "scale": {"domain": [0, 1000]},
                             "axis": {"title": "Beef Production ('000 Tonnes)", "titleColor": "#009E73", "orient": "right"}
                         },
                         "tooltip": [
                             {"field": "quarter", "type": "nominal", "title": "Quarter"},
-                            {"field": "Tonnes (Thousand)", "type": "quantitative", "title": "Beef ('000 Tonnes)"}
+                            {"field": "Tonnes (Thousand)", "type": "quantitative", "title": "Production ('000 Tonnes)"},
+                            {"field": "tonnes_label", "type": "nominal", "title": "Production QoQ"}
                         ]
+                    }
+                },
+                /* Layer 4: Text Annotations for Beef Production QoQ */
+                {
+                    "mark": {
+                        "type": "text",
+                        "align": "center",
+                        "baseline": "bottom",
+                        "dy": -12,
+                        "fontSize": 9,
+                        "fontWeight": "bold",
+                        "color": "#009E73"
+                    },
+                    "encoding": {
+                        "x": {"field": "quarter", "type": "ordinal"},
+                        "y": {"field": "Tonnes (Thousand)", "type": "quantitative"},
+                        "text": {"field": "tonnes_label", "type": "nominal"}
                     }
                 }
             ],
             "resolve": {"scale": {"y": "independent"}}
         };
-
-        
-        const chart6Spec = {
-            ...baseConfig,
-            "data": {
-                "values": [
-                    {"sector": "Cattle & Calves", "value": 17.1},
-                    {"sector": "Milk", "value": 5.9},
-                    {"sector": "Sheep & Lambs", "value": 5.1},
-                    {"sector": "poultry", "value": 4.1},
-                    {"sector": "Wool", "value": 2.3},
-                    {"sector": "Pigs", "value": 1.8}
-                ]
-            },
-            "mark": {"type": "bar", "cornerRadiusEnd": 4},
-            "encoding": {
-                "y": {"field": "sector", "type": "nominal", "sort": "-x", "axis": {"title": null}},
-                "x": {"field": "value", "type": "quantitative", "axis": {"title": "Gross Value ($ Billions)"}},
-                "color": {
-                    "condition": {"test": "datum.sector === 'Cattle & Calves'", "value": "#D55E00"},
-                    "value": "#0A192F"
-                },
-                "tooltip": [
-                    {"field": "sector", "type": "nominal", "title": "Sector"},
-                    {"field": "value", "type": "quantitative", "title": "Gross Value ($B)"}
-                ]
-            }
-        };
-
         /*
         const chart7Spec = {
             ...baseConfig,
