@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Grazing Giant: Anatomy of Australia’s $17B Beef Empire</title>
+    <!-- Vega & Vega-Lite CDN scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.25.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.16.3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.22.2"></script>
+    <!-- Google Fonts for Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #F8FAFC;
+            --text-color: #1E293B;
+            --primary-navy: #0A192F;
+            --accent-blue: #4682B4;
+            --highlight-amber: #E69F00;
+            --card-bg: #FFFFFF;
+            --border-color: #E2E8F0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--primary-navy);
+            color: white;
+            text-align: center;
+            padding: 4rem 1.5rem;
+        }
+
+        header h1 {
+            margin: 0 0 0.75rem 0;
+            font-size: 2.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        header p.subtitle {
+            margin: 0 auto;
+            max-width: 700px;
+            color: #94A3B8;
+            font-size: 1.15rem;
+        }
+
+        .author-meta {
+            font-size: 0.85rem;
+            color: #CBD5E1;
+            margin-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            display: inline-block;
+            padding-top: 0.75rem;
+        }
+
+        .container {
+            max-width: 1050px;
+            margin: 2.5rem auto;
+            padding: 0 1.5rem;
+        }
+
+        section {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.04);
+        }
+
+        .section-tag {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 700;
+            color: var(--highlight-amber);
+            margin-bottom: 0.25rem;
+        }
+
+        h2 {
+            color: var(--primary-navy);
+            font-size: 1.6rem;
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+
+        p.narrative {
+            font-size: 1.05rem;
+            color: #334155;
+            margin-bottom: 1.75rem;
+            line-height: 1.7;
+        }
+
+        .callout {
+            background-color: #F1F5F9;
+            border-left: 4px solid var(--highlight-amber);
+            padding: 1rem 1.25rem;
+            font-size: 0.95rem;
+            color: #1E293B;
+            margin-bottom: 1.5rem;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .chart-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .chart-grid.two-column {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .chart-container {
+            background: #FFFFFF;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.25rem;
+            min-height: 320px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .chart-caption {
+            font-size: 0.85rem;
+            color: #64748B;
+            text-align: center;
+            margin-top: 0.85rem;
+            line-height: 1.4;
+        }
+
+        .data-source-label {
+            font-size: 0.75rem;
+            color: #94A3B8;
+            font-style: italic;
+            text-align: center;
+            margin-top: 0.35rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2.5rem;
+            color: #64748B;
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: 4rem;
+            background: #F1F5F9;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>The Grazing Giant</h1>
+        <p class="subtitle">Anatomy of Australia's $17 Billion Beef Empire: From Arid Outbacks to Global Tables</p>
+        <div class="author-meta">Visualisation & Story by Fauzanda Lathifanka Sunarko | October 2026</div>
+    </header>
+
+    <div class="container">
+
+        <!-- ACT I: THE LAND OF 30 MILLION CATTLE -->
+        <section>
+            <div class="section-tag">Act I: Geography & Infrastructure</div>
+            <h2>1. Mapping the Outback’s Living Inventory</h2>
+            <p class="narrative">
+                Across Australia’s vast landscape, cattle outnumber humans in key regions. Over 2 million head roam an island continent characterized by extreme climate divides—from northern tropical savannas where extensive herds graze across vast properties, to intensive southern feedlot systems feeding Australia’s grain-fed premium sector.
+            </p>
+            <div class="callout">
+                <strong>Key Insight:</strong> Queensland alone holds over 40% of the national herd, acting as the primary engine for grass-fed breeding and finishing operations.
+            </div>
+
+            <div class="chart-grid">
+                <div class="chart-container">
+                    <div id="map-cattle-distribution"></div>
+                    <div class="chart-caption"><strong>Spatial distribution of Australia's cattle as of June 2021</strong></div>
+                    <div class="data-source-label">Source: MLA Livestock distribution maps</div>
+                </div>
+            </div>
+
+            <div class="chart-grid" style="margin-top: 2rem;">
+                <div class="chart-container">
+                    <div id="map-feedlot-turnoff"></div>
+                    <div class="chart-caption"><strong>Turnoff number of heads across Australia May 2026 Quarter:</strong> Distribution of cattle's that are ready to be processed</div>
+                    <div class="data-source-label">Source: ALFA Feedlot Survey</div>
+                </div>
+                
+            </div>
+        </section>
+
+        <!-- ACT II: THE ECONOMIC ENGINE -->
+        <section>
+            <div class="section-tag">Act II: Productivity & Value</div>
+            <h2>2. The $17 Billion Agricultural Titan</h2>
+            <p class="narrative">
+                Steadily rising beef production and slaughter rates drives cattle & calves disposal to an unmatched $17B+ gross value, far outstripping all other livestock sectors.
+            </p>
+
+            <div class="chart-grid two-column">
+                <div class="chart-container">
+                    <div id="chart-quarterly-production"></div>
+                    <div class="chart-caption"><strong>Quarterly beef production tonnage cattle slaughtered trends (2024–2026)</strong></div>
+                    <div class="data-source-label">Source: ABS Livestock products</div>
+                </div>
+                <div class="chart-container">
+                    <div id="chart-gross-value"></div>
+                    <div class="chart-caption"><strong>Local value of cattle and calves disposal compared to the other </strong></div>
+                    <div class="data-source-label">Source: ABS Australian Agriculture: Livestock</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ACT III: THE GLOBAL RECKONING -->
+        <section>
+            <div class="section-tag">Act III: International Trade</div>
+            <h2>3. Feeding a Hungry World</h2>
+            <p class="narrative">
+                Australia exports more than 70% of the beef it produces, acting as a critical food supplier for North America and Asia. When drought squeezes international competitors, Australian red meat fills global supply gaps—navigating complex trade agreements, live export dynamics, and shifting consumer preferences.
+            </p>
+            <div class="callout">
+                <strong>Color Focus:</strong> Amber highlights indicate Australia's top export destination by volume, contrasting against secondary markets in steel blue for maximum visual clarity and colorblind safety.
+            </div>
+
+            <div class="chart-grid two-column">
+                <div class="chart-container">
+                    <div id="chart-export-markets"></div>
+                    <div class="chart-caption"><strong>Chart 7 (Ranked Bar):</strong> Primary international markets for Australian boxed beef exports (thousand tonnes swt).</div>
+                    <div class="data-source-label">Source: Department of Foreign Affairs and Trade (DFAT) / MLA Trade Data</div>
+                </div>
+                <div class="chart-container">
+                    <div id="chart-live-vs-boxed"></div>
+                    <div class="chart-caption"><strong>Chart 8 (Stacked Proportion):</strong> Value distribution between boxed beef exports and live cattle export shipments.</div>
+                    <div class="data-source-label">Source: ABARES Agricultural Outlook</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ACT IV: CLIMATE, CONSUMPTION & RESILIENCE -->
+        <section>
+            <div class="section-tag">Act IV: Climate & Future Horizon</div>
+            <h2>4. Weathering the Storm: Rebuilding vs. Liquidation</h2>
+            <p class="narrative">
+                The ultimate fate of the Australian beef industry is governed by rainfall. When grass is abundant, producers retain breeding females to rebuild herds. When severe dry spells strike, high Female Slaughter Rates (FSR) signal herd liquidation. Balancing domestic appetite with climate resilience remains the industry's ultimate challenge.
+            </p>
+
+            <div class="chart-grid two-column">
+                <div class="chart-container">
+                    <div id="chart-per-capita"></div>
+                    <div class="chart-caption"><strong>Chart 9 (Iconic Comparison):</strong> Annual domestic beef consumption per capita (~22.4kg) vs. global average (~6.0kg).</div>
+                    <div class="data-source-label">Source: OECD-FAO Agricultural Outlook</div>
+                </div>
+                <div class="chart-container">
+                    <div id="chart-herd-cycle"></div>
+                    <div class="chart-caption"><strong>Chart 10 (Dual-Axis Layer):</strong> Female Slaughter Rate (FSR) threshold tracking liquidation (&gt;47%) vs. rebuilding phases.</div>
+                    <div class="data-source-label">Source: MLA Market Information Database</div>
+                </div>
+            </div>
+
+            <div class="chart-grid" style="margin-top: 2rem;">
+                <div class="chart-container">
+                    <div id="chart-pasture-impact"></div>
+                    <div class="chart-caption"><strong>Chart 11 (Scatter Plot):</strong> Correlation between pasture biomass availability indices and annual turnoff volume.</div>
+                    <div class="data-source-label">Source: Bureau of Meteorology (BOM) & MLA Pasture Index</div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <p><strong>Data Citation & Sources:</strong> Australian Bureau of Statistics (ABS) - Livestock Products & National Herd Survey (2025–2026); Meat & Livestock Australia (MLA) Fast Facts & Market Information. Visualisations powered by Vega-Lite.</p>
+    </footer>
+
+    <!-- Vega-Lite Embedding JavaScript -->
+    <script>
+        const topoJsonUrl = "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/2_symbol_map/js/ne_110m_admin_0_countries.topojson";
+
+        const baseConfig = {
+            "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+            "width": 400,
+            "height": 220,
+            "autosize": {"type": "fit", "contains": "padding"},
+            "config": {
+                "view": {"stroke": null},
+                "font": "Inter",
+                "axis": {
+                    "domainColor": "#CBD5E1", 
+                    "tickColor": "#CBD5E1", 
+                    "labelColor": "#334155", 
+                    "titleColor": "#0A192F",
+                    "titleFontSize": 11
+                }
+            }
+        };
+
+        const map1Spec = {
+            "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+            "width": 620,
+            "height": 300,
+            "projection": {"type": "mercator", "center": [134, -28], "scale": 450},
+            "layer": [
+                {
+                    "data": {"url": topoJsonUrl, "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}},
+                    "mark": {"type": "geoshape", "fill": "#E2E8F0", "stroke": "white"}
+                },
+                {
+                    "data": {
+                        "values": [
+                            {"state": "Queensland", "lat": -22.5, "lon": 144.0, "Head (Millions)": 10.7},
+                            {"state": "New South Wales", "lat": -32.0, "lon": 147.0, "hHead (Millions)": 4.4 },
+                            {"state": "Victoria", "lat": -37.0, "lon": 144.5, "Head (Millions)": 3.6},
+                            {"state": "Western Australia", "lat": -25.0, "lon": 122.0, "Head (Millions)": 2.1},
+                            {"state": "Northern Territory", "lat": -19.0, "lon": 133.0, "Head (Millions)": 1.7 },
+                            {"state": "South Australia", "lat": -30.0, "lon": 135.0, "Head (Millions)": 1.0},
+                            {"state": "Tasmania", "lat": -42.0, "lon": 146.5, "Head (Millions)": 0.8}
+                        ]
+                    },
+                    "selection": {"pts": {"type": "single", "on": "mouseover", "fields": ["state"]}},
+                    "mark": {"type": "circle", "tooltip": {"content": "data"}},
+                    "encoding": {
+                        "longitude": {"field": "lon", "type": "quantitative"},
+                        "latitude": {"field": "lat", "type": "quantitative"},
+                        "size": {"field": "Head (Millions)", "type": "quantitative", "scale": {"domain": [0, 15], "range": [0, 1500]}},
+                        "stroke": {"condition": {"selection": "pts", "value": "#E69F00"}, "value": "#0A192F"},
+                        "strokeWidth": {"condition": {"selection": "pts", "value": 3}, "value": 1}
+                    }
+                }
+            ]
+        };
+
+        const map2Spec = {
+            "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+            "width": 620,
+            "height": 300,
+            "projection": {"type": "mercator", "center": [134, -28], "scale": 350},
+            "layer": [
+                {
+                    "data": {"url": topoJsonUrl, "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}},
+                    "mark": {"type": "geoshape", "fill": "#E2E8F0", "stroke": "white"}
+                },
+                {
+                    "data": {
+                        "values": [
+                            {"state": "Queensland", "lat": -22.5, "lon": 144.0, "Turnoff (Thousands)": 632.9},
+                            {"state": "New South Wales", "lat": -32.0, "lon": 147.0, "Turnoff (Thousands)": 278.7},
+                            {"state": "Victoria", "lat": -37.0, "lon": 144.5, "Turnoff (Thousands)": 51.03},
+                            {"state": "Western Australia", "lat": -25.0, "lon": 122.0, "Turnoff (Thousands)": 42.7},
+                            {"state": "South Australia", "lat": -30.0, "lon": 135.0, "Turnoff (Thousands)": 41.37}
+                           
+                        ]
+                    },
+                    "mark": {"type": "circle", "color": "#E69F00", "opacity": 0.85, "stroke": "#0A192F"},
+                    "encoding": {
+                        "longitude": {"field": "lon", "type": "quantitative"},
+                        "latitude": {"field": "lat", "type": "quantitative"},
+                        "size": {"field": "Turnoff (Thousands)", "type": "quantitative", "scale": {"range": [50, 700]}},
+                        "tooltip": [{"field": "Turnoff (Thousands)"}, {"field": "state"}]
+                    }
+                }
+            ]
+        };
+
+       
+        const chart4Spec = {
+            ...baseConfig,
+            "data": {
+                "values": [
+                    {"quarter": "2024-Q2", "Cattle (Thousand)": 2032.8, "Tonnes (Thousand)": 629.7},
+                    {"quarter": "2024-Q3", "Cattle (Thousand)": 2111.1, "Tonnes (Thousand)": 659.1},
+                    {"quarter": "2024-Q4", "Cattle (Thousand)": 2188.3, "Tonnes (Thousand)": 676.6},
+                    {"quarter": "2025-Q1", "Cattle (Thousand)": 2310.8, "Tonnes (Thousand)": 708.3},
+                    {"quarter": "2025-Q2", "Cattle (Thousand)": 2277.4, "Tonnes (Thousand)": 705.8},
+                    {"quarter": "2025-Q3", "Cattle (Thousand)": 2331.9, "Tonnes (Thousand)": 725.0},
+                    {"quarter": "2025-Q4", "Cattle (Thousand)": 2369.1, "Tonnes (Thousand)": 731.7},
+                    {"quarter": "2026-Q1", "Cattle (Thousand)": 2417.5, "Tonnes (Thousand)": 751.5},
+                    {"quarter": "2026-Q2", "Cattle (Thousand)": 2484.9, "Tonnes (Thousand)": 777.2}
+                ]
+            },
+            "layer": [
+                {
+                    "mark": {"type": "bar", "cornerRadiusEnd": 3, "color": "#CC79A7", "opacity": 0.7},
+                    "encoding": {
+                        "x": {"field": "quarter", "type": "ordinal", "axis": {"title": "Quarter", "labelAngle": -30}},
+                        "y": {
+                            "field": "Cattle (Thousand)",
+                            "type": "quantitative",
+                            "axis": {"title": "Cattle Slaughter ('000 Head)", "titleColor": "#CC79A7"}
+                        },
+                        "tooltip": [
+                            {"field": "quarter", "type": "nominal", "title": "Quarter"},
+                            {"field": "Cattle (Thousand)", "type": "quantitative", "title": "Cattle ('000 Head)"}
+                        ]
+                    }
+                },
+                {
+                    "mark": {"type": "line", "strokeWidth": 3, "color": "#009E73", "point": true},
+                    "encoding": {
+                        "x": {"field": "quarter", "type": "ordinal"},
+                        "y": {
+                            "field": "Tonnes (Thousand)",
+                            "type": "quantitative",
+                            "scale": {"domain": [0, 2500]},
+                            "axis": {"title": "Beef Production ('000 Tonnes)", "titleColor": "#009E73", "orient": "right"}
+                        },
+                        "tooltip": [
+                            {"field": "quarter", "type": "nominal", "title": "Quarter"},
+                            {"field": "Tonnes (Thousand)", "type": "quantitative", "title": "Beef ('000 Tonnes)"}
+                        ]
+                    }
+                }
+            ],
+            "resolve": {"scale": {"y": "independent"}}
+        };
+
+        const chart6Spec = {
+            ...baseConfig,
+            "data": {
+                "values": [
+                    {"sector": "Cattle & Calves", "value": 17.1},
+                    {"sector": "Milk", "value": 5.9},
+                    {"sector": "Sheep & Lambs", "value": 5.1},
+                    {"sector": "poultry", "value": 4.1},
+                    {"sector": "Wool", "value": 2.3},
+                    {"sector": "Pigs", "value": 1.8}
+                ]
+            },
+            "mark": {"type": "bar", "cornerRadiusEnd": 4},
+            "encoding": {
+                "y": {"field": "sector", "type": "nominal", "sort": "-x", "axis": {"title": null}},
+                "x": {"field": "value", "type": "quantitative", "axis": {"title": "Gross Value ($ Billions)"}},
+                "color": {
+                    "condition": {"test": "datum.sector === 'Cattle & Calves'", "value": "#D55E00"},
+                    "value": "#0A192F"
+                },
+                "tooltip": [
+                    {"field": "sector", "type": "nominal", "title": "Sector"},
+                    {"field": "value", "type": "quantitative", "title": "Gross Value ($B)"}
+                ]
+            }
+        };
+
+        const chart7Spec = {
+            ...baseConfig,
+            "data": {
+                "values": [
+                    {"market": "United States", "volume": 320},
+                    {"market": "Japan", "volume": 280},
+                    {"market": "China", "volume": 210},
+                    {"market": "South Korea", "volume": 170},
+                    {"market": "Indonesia", "volume": 90}
+                ]
+            },
+            "mark": {"type": "bar", "cornerRadiusEnd": 4},
+            "encoding": {
+                "y": {"field": "market", "type": "nominal", "sort": "-x", "axis": {"title": null}},
+                "x": {"field": "volume", "type": "quantitative", "axis": {"title": "Volume ('000 Tonnes Swt)"}},
+                "color": {
+                    "condition": {"test": "datum.market === 'United States'", "value": "#E69F00"},
+                    "value": "#4682B4"
+                },
+                "tooltip": [
+                    {"field": "market", "type": "nominal", "title": "Destination"},
+                    {"field": "volume", "type": "quantitative", "title": "Volume ('000 Tonnes)"}
+                ]
+            }
+        };
+
+        const chart8Spec = {
+            ...baseConfig,
+            "data": {
+                "values": [
+                    {"type": "Boxed Beef Exports", "value": 12.5},
+                    {"type": "Live Cattle Exports", "value": 1.2}
+                ]
+            },
+            "mark": {"type": "bar", "cornerRadiusEnd": 4},
+            "encoding": {
+                "x": {"field": "type", "type": "nominal", "axis": {"title": null}},
+                "y": {"field": "value", "type": "quantitative", "axis": {"title": "Export Value ($ Billion)"}},
+                "color": {
+                    "condition": {"test": "datum.type === 'Boxed Beef Exports'", "value": "#4682B4"},
+                    "value": "#E69F00"
+                },
+                "tooltip": [
+                    {"field": "type", "type": "nominal", "title": "Channel"},
+                    {"field": "value", "type": "quantitative", "title": "Value ($B)"}
+                ]
+            }
+        };
+
+        const chart9Spec = {
+            ...baseConfig,
+            "data": {
+                "values": [
+                    {"region": "Australia", "kg": 22.4},
+                    {"region": "Global Average", "kg": 6.0},
+                    {"region": "United States", "kg": 37.2}
+                ]
+            },
+            "mark": {"type": "bar", "cornerRadiusEnd": 4},
+            "encoding": {
+                "y": {"field": "region", "type": "nominal", "sort": "-x", "axis": {"title": null}},
+                "x": {"field": "kg", "type": "quantitative", "axis": {"title": "Annual Consumption (kg per capita)"}},
+                "color": {
+                    "condition": {"test": "datum.region === 'Australia'", "value": "#E69F00"},
+                    "value": "#64748B"
+                },
+                "tooltip": [
+                    {"field": "region", "type": "nominal", "title": "Region"},
+                    {"field": "kg", "type": "quantitative", "title": "Consumption (kg)"}
+                ]
+            }
+        };
+
+        const chart10Spec = {
+            ...baseConfig,
+            "data": {
+                "values": [
+                    {"year": "2021", "fsr": 44.5},
+                    {"year": "2022", "fsr": 42.0},
+                    {"year": "2023", "fsr": 46.8},
+                    {"year": "2024", "fsr": 49.2},
+                    {"year": "2025", "fsr": 48.0},
+                    {"year": "2026", "fsr": 45.5}
+                ]
+            },
+            "layer": [
+                {
+                    "mark": {"type": "line", "point": true, "strokeWidth": 3},
+                    "encoding": {
+                        "x": {"field": "year", "type": "ordinal", "axis": {"title": "Year"}},
+                        "y": {"field": "fsr", "type": "quantitative", "scale": {"domain": [35, 55]}, "axis": {"title": "Female Slaughter Rate (%)"}},
+                        "color": {"value": "#4682B4"}
+                    }
+                },
+                {
+                    "mark": {"type": "rule", "color": "#E69F00", "strokeDash": [4, 4]},
+                    "encoding": {
+                        "y": {"datum": 47}
+                    }
+                }
+            ],
+            "encoding": {
+                "tooltip": [
+                    {"field": "year", "type": "nominal", "title": "Year"},
+                    {"field": "fsr", "type": "quantitative", "title": "Female Slaughter Rate (%)"}
+                ]
+            }
+        };
+
+        const chart11Spec = {
+            ...baseConfig,
+            "data": {
+                "values": [
+                    {"biomassIndex": 35, "turnoff": 6.8},
+                    {"biomassIndex": 45, "turnoff": 7.2},
+                    {"biomassIndex": 55, "turnoff": 7.9},
+                    {"biomassIndex": 65, "turnoff": 8.5},
+                    {"biomassIndex": 75, "turnoff": 9.1},
+                    {"biomassIndex": 85, "turnoff": 9.8}
+                ]
+            },
+            "mark": {"type": "point", "filled": true, "size": 80},
+            "encoding": {
+                "x": {"field": "biomassIndex", "type": "quantitative", "axis": {"title": "Pasture Biomass Index"}},
+                "y": {"field": "turnoff", "type": "quantitative", "axis": {"title": "Annual Turnoff Volume (Million Head)"}},
+                "color": {"value": "#E69F00"},
+                "tooltip": [
+                    {"field": "biomassIndex", "type": "quantitative", "title": "Biomass Index"},
+                    {"field": "turnoff", "type": "quantitative", "title": "Turnoff (M Head)"}
+                ]
+            }
+        };
+
+    
+        vegaEmbed('#map-cattle-distribution', map1Spec, {"actions": false});
+        vegaEmbed('#map-feedlot-turnoff', map2Spec, {"actions": false});
+        vegaEmbed('#chart-quarterly-production', chart4Spec, {"actions": false});
+        vegaEmbed('#chart-gross-value', chart6Spec, {"actions": false});
+        vegaEmbed('#chart-export-markets', chart7Spec, {"actions": false});
+        vegaEmbed('#chart-live-vs-boxed', chart8Spec, {"actions": false});
+        vegaEmbed('#chart-per-capita', chart9Spec, {"actions": false});
+        vegaEmbed('#chart-herd-cycle', chart10Spec, {"actions": false});
+        vegaEmbed('#chart-pasture-impact', chart11Spec, {"actions": false});
+    </script>
+</body>
+</html>
