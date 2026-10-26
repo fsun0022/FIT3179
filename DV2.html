@@ -1,0 +1,1761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Grazing Giant: Anatomy of Australia’s $17B Beef Empire</title>
+    <!-- Vega & Vega-Lite CDN scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.25.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.16.3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.22.2"></script>
+    <!-- Google Fonts for Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #FAFAFA;
+            --text-color: #1F2937;
+            --primary-navy: #0F172A;
+            --accent-blue: #3B82F6;
+            --highlight-amber: #D97706;
+            --border-color: #E5E7EB;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.7;
+        }
+
+        header {
+            background-color: var(--primary-navy);
+            color: #FFFFFF;
+            text-align: center;
+            padding: 4.5rem 1.5rem 3.5rem 1.5rem;
+            border-bottom: 4px solid var(--highlight-amber);
+        }
+
+        header h1 {
+            margin: 0 0 0.5rem 0;
+            font-size: 2.75rem;
+            letter-spacing: -0.03em;
+        }
+
+        header p.subtitle {
+            margin: 0 auto;
+            max-width: 720px;
+            color: #94A3B8;
+            font-size: 1.15rem;
+        }
+
+        .author-meta {
+            font-size: 0.8rem;
+            color: #64748B;
+            margin-top: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 2.5rem auto;
+            padding: 0 2rem;
+            border: 2px solid grey;
+        }
+
+        /* Centered Full-Width Sections for Maps */
+        .full-width-section {
+            padding: 3.5rem 0;
+            border-bottom: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .full-width-text {
+            max-width: 800px;
+            margin: 0 auto 2rem auto;
+            text-align: center;
+        }
+
+        .full-width-chart {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        /* Side-by-Side Row Layout for Statistical Charts */
+        .row-section {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            align-items: center;
+            padding: 3.5rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .row-section:last-of-type {
+            border-bottom: none;
+        }
+
+        @media (min-width: 850px) {
+            .row-section {
+                grid-template-columns: 1fr 1fr;
+            }
+            .row-section:nth-child(even) .row-text {
+                order: 2;
+            }
+            .row-section:nth-child(even) .row-chart {
+                order: 1;
+            }
+        }
+
+        .section-tag {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-weight: 700;
+            color: var(--highlight-amber);
+            margin-bottom: 0.4rem;
+            vertical-align: top;
+        }
+
+        h2 {
+            color: var(--primary-navy);
+            font-size: 1.5rem;
+            margin-top: 0;
+            margin-bottom: 0.85rem;
+            letter-spacing: -0.02em;
+        }
+
+        p.narrative {
+            font-size: 1rem;
+            color: #4B5563;
+            margin-bottom: 0;
+            vertical-align: top;
+        }
+
+        .row-chart {
+            background: transparent;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .chart-caption {
+            font-size: 0.8rem;
+            color: #6B7280;
+            margin-top: 0.85rem;
+            line-height: 1.5;
+        }
+
+        .chart-caption strong {
+            color: #374151;
+        }
+        .data-source-label {
+            font-size: 0.75rem;
+            color: #94A3B8;
+            font-style: italic;
+            text-align: center;
+            margin-top: 0.35rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 3.5rem 1.5rem;
+            color: #6B7280;
+            font-size: 0.85rem;
+            background: #F3F4F6;
+            border-top: 1px solid var(--border-color);
+            margin-top: 4rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>The Grazing Giant</h1>
+        <p class="subtitle">An intimate look at Australia's $17 Billion beef ecosystem—tracing the journey from vast pastoral lands to international dinner tables.</p>
+        <div class="author-meta">Designed by Fauzanda Lathifanka Sunarko | October 2026</div>
+    </header>
+
+    <div class="container">
+
+        <!-- MAP 1: Cattle Distribution -->
+        <div class="row-section">
+            <div class="row-text">
+                <div class="section-tag">Chapter I: The Living Landscape</div>
+                <h2>Where Millions of Cattle Call Australia Home</h2>
+                <p class="narrative">
+                    Long before it reaches any plate, Australia's beef story begins across a staggering expanse of land. Millions of cattle roam across wildly diverse environments—thriving beneath the harsh tropical sun of northern savannas and grazing across lush, rolling green pastures in the southeast.
+                </p>
+            </div>
+            <div class="full-width-chart">
+                <div id="map-cattle-distribution"></div>
+                <div class="chart-caption"><strong>Map 1 (Proportional Symbol):</strong> Spatial distribution and headcount scale of Australia's cattle inventory across states.</div>
+                <div class="data-source-label">Source: Meat & Livestock Australia (MLA)</div>
+            </div>
+        </div>
+
+        <!-- MAP 2: Feedlot Turnoff Density -->
+        <div class="row-section">
+            <div class="row-text">
+                <div class="section-tag">Chapter II: The Finishing Touch</div>
+                <h2>From Open Pastures to High-Performance Feedlots</h2>
+                <p class="narrative">
+                    Not all cattle take the same path to market. While grass-fed herds define our outback identity, a vital transformation occurs in specialized grain-fed feedlots. Here, precise nutrition and controlled management optimize marbling and tenderness, preparing livestock for premium domestic and export markets.
+                </p>
+            </div>
+            <div class="full-width-chart">
+                <div id="map-feedlot-turnoff"></div>
+                <div class="chart-caption"><strong>Map 2 (Choropleth):</strong> Feedlot cattle turnoff density per square megametre across Australian states, highlighting high-throughput finishing hubs in Queensland and New South Wales.</div>
+                <div class="data-source-label">Source: Australian Lot Feeders' Association (ALFA) Survey</div>
+            </div>
+        </div>
+
+        <!-- MAP 3: Processing Logistics -->
+        <div class="full-width-section">
+            <div class="full-width-text">
+                <div class="section-tag">Chapter III: Species Composition</div>
+                <h2>Regional Slaughter Proportions by Livestock Species</h2>
+                <p class="narrative">
+                    Processing facilities handle a diverse mix of livestock species depending on regional agricultural specializations. Mini waffle breakdowns mapped across state territories reveal the exact balance between cattle, lambs, and sheep processed across processing plants nationwide.
+                </p>
+            </div>
+            <div class="full-width-chart">
+                <div id="map-waffle-container"></div>
+                <div class="chart-caption"><strong>Map 3 (Symbol Map with Waffle Markers):</strong> Regional slaughter species share breakdown (Cattle, Lambs, Sheep) mapped across state centers.</div>
+                <div class="data-source-label">Source: Meat & Livestock Australia (MLA)</div>
+            </div>
+        </div>
+
+        <!-- CHART 4 & 5: Quarterly Production & Carcase Weights -->
+        <div class="row-section">
+            <div class="row-text">
+                <div class="section-tag">Chapter IV: The Industrial Engine</div>
+                <h2>Mastering Slaughter Volume and Tonnage Yield</h2>
+                <p class="narrative">
+                    Behind every quarterly production cycle lies a masterclass in agricultural efficiency. Tracking head slaughter volume alongside total beef tonnage reveals steady productivity gains, ensuring consistent supply to satisfy both domestic demand and lucrative overseas buyers.
+                </p>
+            </div>
+            <div class="row-chart">
+                <div id="chart-quarterly-production"></div>
+                <div class="chart-caption"><strong>Charts 4 & 5 (Dual-Axis Multi-Series):</strong> Quarterly cattle slaughter head count ('000) versus total beef production tonnage ('000 Tonnes).</div>
+                <div class="data-source-label">Source: ABS Livestock products</div>
+            </div>
+        </div>
+
+        <!-- CHART 6: Gross Value -->
+        <div class="row-section">
+            <div class="row-text">
+                <div class="section-tag">Chapter V: Economic Dominance</div>
+                <h2>The Crown Jewel of Australian Agriculture</h2>
+                <p class="narrative">
+                    Weighing in at over $17.1 billion in gross annual value, cattle outshine nearly every other livestock sector combined. This economic weight makes the beef industry a vital pillar supporting regional employment, rural townships, and national export revenues.
+                </p>
+            </div>
+            <div class="row-chart">
+                <div id="chart-gross-value"></div>
+                <div class="chart-caption"><strong>Chart 6 (Bar Chart):</strong> Gross value comparison across major Australian livestock sectors ($ Billions).</div>
+                <div class="data-source-label">Source: ABS Australian Agriculture-Livestock</div>
+            </div>
+        </div>
+
+        <!-- CHART 7: Global Export Markets -->
+        <div class="full-width-section">
+            <div class="full-width-text">
+                <div class="section-tag">Chapter VI: Global Horizons</div>
+                <h2>Feeding the World: Our International Trade Corridors</h2>
+                <p class="narrative">
+                    Australians consume plenty of steak, but our production extends far beyond local shores. Across North America and Asia, major economies rely on our product, with the United States and Japan standing tall as primary destinations for high-grade Australian beef.
+                </p>
+            </div>
+            <div class="full-width-chart">
+                <div id="map-flow-container"></div>
+                <div class="chart-caption"><strong>Map 3 (Global Flow Map):</strong> Curved export routing and regional destination volumes (Tonnes) originating from Australia.</div>
+                <div class="data-source-label">Source: Meat & Livestock Australia (MLA)</div>
+            </div>
+        </div>
+
+        <!-- CHART 8: Export Destinations by State Heatmap -->
+        <div class="row-section">
+            <div class="row-text">
+                <div class="section-tag">Chapter VII: Trade Diversification</div>
+                <h2>State-Level Export Market Proportions</h2>
+                <p class="narrative">
+                    Different states cater to distinct international palates. Analyzing export destination percentages by origin state highlights strategic trade alignments—such as Queensland's dominance in Asian markets and southern states' strong ties to North American shelves.
+                </p>
+            </div>
+            <div class="row-chart">
+                <div id="chart-export-markets"></div>
+                <div class="chart-caption"><strong>Chart 8 (Heatmap):</strong> Percentage share of beef exports directed to key global markets across each Australian state.</div>
+                <div class="data-source-label">Source: Meat & Livestock Australia (MLA)</div>
+            </div>
+        </div>
+
+        <!-- CHART 9: Domestic Consumption Waffle -->
+        <div class="row-section">
+            <div class="row-text">
+                <div class="section-tag">Chapter VIII: The Local Table</div>
+                <h2>National Meat Export and Production Breakdown</h2>
+                <p class="narrative">
+                    A comprehensive look at national meat production distribution demonstrates the massive share commanded by beef and veal, complemented by lamb, mutton, and fancy meats destined for specialized culinary markets.
+                </p>
+            </div>
+            <div class="row-chart">
+                <div id="waffle-container"></div>
+                <div class="chart-caption"><strong>Chart 9 (10x10 Waffle Chart):</strong> Percentage share of total meat export and production volume by category.</div>
+                <div class="data-source-label">Source: Meat & Livestock Australia (MLA)</div>
+            </div>
+        </div>
+
+        <!-- CHART 10: Retail Prices Dumbbell Plot -->
+        <div class="full-width-section">
+            <div class="full-width-text">
+                <div class="section-tag">Chapter IX: Price Dynamics</div>
+                <h2>Retail Price Shifts: Comparing 2025 and 2026 Values</h2>
+                <p class="narrative">
+                    Market valuations are constantly evolving at the retail counter. A dumbbell comparison between the 2025 and 2026 fiscal years reveals clear upward trajectories in premium red meats like beef and lamb, contrasted against the relative price stability of poultry and pork.
+                </p>
+            </div>
+            <div class="row-chart" style="margin: 0 auto; width: 100%; display: flex; justify-content: center;">
+                <div id="dotplot-container"></div>
+            </div>
+            <div class="chart-caption" style="margin-top: 1rem;"><strong>Chart 10 (Dumbbell Plot):</strong> Average retail prices (AUD c/kg) comparing 2025 (blue) and 2026 (red) across major meat categories.</div>
+            <div class="data-source-label">Source: Meat & Livestock Australia (MLA)</div>
+        </div>
+
+        <!-- CHART 11: Domestic Meat Consumption per Capita -->
+        <div class="row-section">
+            <div class="row-text">
+                <div class="section-tag">Chapter X: Consumer Demands</div>
+                <h2>National Meat Consumption per Capita</h2>
+                <p class="narrative">
+                    Understanding the domestic palate is key to balancing Australia's massive beef production. At a total average consumption of 141.5 kg per capita annually, even though poultry commands the largest share of household tables, followed by steady demand across seafood, beef still have considerable share of household tables.
+                </p>
+            </div>
+            <div class="row-chart">
+                <div id="chart-live-export"></div>
+                <div class="chart-caption"><strong>Chart 12 (Horizontal Bar Chart):</strong> Percentage share of per capita meat consumption across major categories (Total: 141.5 kg).</div>
+                <div class="data-source-label">Source: Meat & Livestock Australia (MLA)</div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p><strong>Data Citation & Sources:</strong> Australian Bureau of Statistics (ABS) - Livestock Products & National Retail Price Reports (2025–2026); Meat & Livestock Australia (MLA) Fast Facts & Market Information[cite: 1, 3]. Visualisations powered by Vega-Lite[cite: 1].</p>
+    </footer>
+
+
+    <!-- Vega-Lite Specifications & Embedding -->
+    <script>
+        const topoJsonUrl = "https://fsun0022.github.io/FIT3179/STE_2021_AUST_GDA2020.topojson";
+
+        // Global Strict Category Palette (Color-Blind Safe & Non-Overlapping)
+        const CATEGORY_COLORS = {
+            "Beef": "#2563EB",            // Royal Blue
+            "Beef / Veal": "#2563EB",     // Royal Blue
+            "Cattle & Calves": "#2563EB", // Royal Blue
+            "Cattle": "#2563EB",          // Royal Blue
+            "Lambs": "#0D9488",           // Deep Teal
+            "Lamb": "#0D9488",            // Deep Teal
+            "Sheep": "#D97706",
+            "Sheep&Lambs": "#B45309", 
+            "Goat": "#999933",        
+            "Mutton": "#D97706",          // Amber
+            "Fancy Meat": "#8B5CF6",      // Purple
+            "Pork": "#EC4899",            // Pink
+            "Pigs": "#EC4899",            // Pink
+            "Poultry": "#64748B",         // Slate Grey
+            "Chicken": "#64748B",         // Slate Grey
+            "Milk": "#0284C7",            // Sky Blue
+            "Wool": "#7C3AED",            // Violet
+            "Goat": "#10B981"             // Emerald Green
+        };
+
+        const baseConfig = {
+            "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+            "width": "container",
+            "height": 220,
+            "config": {
+                "view": {"stroke": null},
+                "font": "Inter",
+                "background": "transparent",
+                "axis": {
+                    "domainColor": "#D1D5DB", 
+                    "tickColor": "#D1D5DB", 
+                    "labelColor": "#4B5563", 
+                    "titleColor": "#0F172A",
+                    "titleFontSize": 10,
+                    "gridColor": "#E5E7EB"
+                }
+            }
+        };
+
+        const mapSpec = {
+            "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+            "width": 620,
+            "height": 450,
+            "projection": {
+                "type": "mercator",
+                "center": [133, -27],
+                "scale": 600
+            },
+            "layer": [
+                // 1. Base Map Layer (Australian State Boundaries)
+                {
+                    "data": {
+                        "url": topoJsonUrl, 
+                        "format": {"type": "topojson", "feature": "STE_2021_AUST_GDA2020"}
+                    },
+                    "mark": {"type": "geoshape", "fill": "#F8FAFC", "stroke": "#CBD5E1", "strokeWidth": 1.2}
+                },
+                // 2. Dot Density Layer (1 Dot = 1 Million Cattle)
+                {
+                    "data": {
+                        "values": [
+                            // QLD: 13 dots (13.3M)
+                            {"state": "Queensland", "lat": -22.5, "lon": 144.0}, {"state": "Queensland", "lat": -21.5, "lon": 143.0},
+                            {"state": "Queensland", "lat": -23.5, "lon": 145.0}, {"state": "Queensland", "lat": -20.5, "lon": 144.5},
+                            {"state": "Queensland", "lat": -24.5, "lon": 143.5}, {"state": "Queensland", "lat": -22.0, "lon": 146.0},
+                            {"state": "Queensland", "lat": -23.0, "lon": 142.5}, {"state": "Queensland", "lat": -21.0, "lon": 141.5},
+                            {"state": "Queensland", "lat": -25.0, "lon": 146.5}, {"state": "Queensland", "lat": -19.5, "lon": 143.5},
+                            {"state": "Queensland", "lat": -20.0, "lon": 146.0}, {"state": "Queensland", "lat": -26.0, "lon": 144.0},
+                            {"state": "Queensland", "lat": -24.0, "lon": 148.0},
+
+                            // NSW: 6 dots (6.1M)
+                            {"state": "New South Wales", "lat": -32.0, "lon": 147.0}, {"state": "New South Wales", "lat": -31.0, "lon": 148.0},
+                            {"state": "New South Wales", "lat": -33.0, "lon": 146.0}, {"state": "New South Wales", "lat": -30.5, "lon": 149.5},
+                            {"state": "New South Wales", "lat": -32.5, "lon": 148.5}, {"state": "New South Wales", "lat": -34.0, "lon": 147.5},
+
+                            // VIC: 4 dots (4.1M)
+                            {"state": "Victoria", "lat": -37.0, "lon": 144.5}, {"state": "Victoria", "lat": -36.5, "lon": 143.5},
+                            {"state": "Victoria", "lat": -37.5, "lon": 145.5}, {"state": "Victoria", "lat": -38.0, "lon": 143.8},
+
+                            // WA: 2 dots (2.3M)
+                            {"state": "Western Australia", "lat": -25.0, "lon": 122.0}, {"state": "Western Australia", "lat": -23.5, "lon": 120.5},
+
+                            // NT: 2 dots (1.9M)
+                            {"state": "Northern Territory", "lat": -19.0, "lon": 133.0}, {"state": "Northern Territory", "lat": -17.5, "lon": 134.0},
+
+                            // SA: 1 dot (1.2M)
+                            {"state": "South Australia", "lat": -30.0, "lon": 135.0},
+
+                            // TAS: 1 dot (0.86M)
+                            {"state": "Tasmania", "lat": -42.0, "lon": 146.5}
+                        ]
+                    },
+                    "mark": {
+                        "type": "circle", 
+                        "size": 45, 
+                        "color": "#2563EB", 
+                        "opacity": 0.85, 
+                        "stroke": "#FFFFFF", 
+                        "strokeWidth": 0.5
+                    },
+                    "encoding": {
+                        "longitude": {"field": "lon", "type": "quantitative"},
+                        "latitude": {"field": "lat", "type": "quantitative"},
+                        "tooltip": [
+                            {"field": "state", "type": "nominal", "title": "State Name"},
+                            {"value": "1 Dot = 1 Million Cattle", "title": "Scale Unit"}
+                        ]
+                    }
+                },
+                // 3. State Data Labels
+                {
+                    "data": {
+                        "values": [
+                            {"label": "QLD: 13.3M (13 dots)", "lat": -28.0, "lon": 144.0},
+                            {"label": "NSW: 6.1M (6 dots)", "lat": -29.0, "lon": 148.0},
+                            {"label": "VIC: 4.1M (4 dots)", "lat": -39.0, "lon": 144.5},
+                            {"label": "WA: 2.3M (2 dots)", "lat": -22.0, "lon": 121.0},
+                            {"label": "NT: 1.9M (2 dots)", "lat": -15.8, "lon": 133.0},
+                            {"label": "SA: 1.2M (1 dot)", "lat": -28.2, "lon": 135.0},
+                            {"label": "TAS: 0.86M (1 dot)", "lat": -43.2, "lon": 146.5}
+                        ]
+                    },
+                    "mark": {
+                        "type": "text", 
+                        "fontSize": 11, 
+                        "fontWeight": "600", 
+                        "fill": "#0F172A"
+                    },
+                    "encoding": {
+                        "longitude": {"field": "lon", "type": "quantitative"},
+                        "latitude": {"field": "lat", "type": "quantitative"},
+                        "text": {"field": "label", "type": "nominal"}
+                    }
+                },
+
+                // --- 4. EXPLANATORY ANNOTATION CALLOUT (INSIGHT HIGHLIGHT) ---
+                // Annotation Background Box
+                {
+                    "data": {
+                        "values": [{"lon": 149.0, "lat": -16.0}]
+                    },
+                    "mark": {
+                        "type": "rect",
+                        "width": 175,
+                        "height": 46,
+                        "fill": "#FEF3C7",
+                        "stroke": "#D97706",
+                        "strokeWidth": 1.5,
+                        "cornerRadius": 4,
+                        "opacity": 0.95
+                    },
+                    "encoding": {
+                        "longitude": {"field": "lon", "type": "quantitative"},
+                        "latitude": {"field": "lat", "type": "quantitative"}
+                    }
+                },
+                // Annotation Text Line 1
+                {
+                    "data": {
+                        "values": [{"lon": 141.0, "lat": -15.0, "label": "📌 NATIONAL HERD EPICENTER"}]
+                    },
+                    "mark": {
+                        "type": "text",
+                        "fontSize": 9.5,
+                        "fontWeight": "700",
+                        "fill": "#92400E",
+                        "align": "left",
+                        "baseline": "middle"
+                    },
+                    "encoding": {
+                        "longitude": {"field": "lon", "type": "quantitative"},
+                        "latitude": {"field": "lat", "type": "quantitative"},
+                        "text": {"field": "label", "type": "nominal"}
+                    }
+                },
+                // Annotation Text Line 2
+                {
+                    "data": {
+                        "values": [{"lon": 141.0, "lat": -17.0, "label": "QLD holds 48.5% of Australia's cattle."}]
+                    },
+                    "mark": {
+                        "type": "text",
+                        "fontSize": 9,
+                        "fontWeight": "500",
+                        "fill": "#78350F",
+                        "align": "left",
+                        "baseline": "middle"
+                    },
+                    "encoding": {
+                        "longitude": {"field": "lon", "type": "quantitative"},
+                        "latitude": {"field": "lat", "type": "quantitative"},
+                        "text": {"field": "label", "type": "nominal"}
+                    }
+                },
+
+                
+                // Legend Dot Icon
+                {
+                    "data": {
+                        "values": [{"lon": 111.0, "lat": -37.5}]
+                    },
+                    "mark": {
+                        "type": "circle",
+                        "size": 45,
+                        "color": "#2563EB",
+                        "opacity": 0.85,
+                        "stroke": "#FFFFFF",
+                        "strokeWidth": 0.5
+                    },
+                    "encoding": {
+                        "longitude": {"field": "lon", "type": "quantitative"},
+                        "latitude": {"field": "lat", "type": "quantitative"}
+                    }
+                },
+                // Legend Label Text
+                {
+                    "data": {
+                        "values": [{"lon": 113.2, "lat": -37.5, "label": "= 1 Million Cattle Head"}]
+                    },
+                    "mark": {
+                        "type": "text",
+                        "fontSize": 10,
+                        "fontWeight": "600",
+                        "fill": "#1E293B",
+                        "align": "left",
+                        "baseline": "middle"
+                    },
+                    "encoding": {
+                        "longitude": {"field": "lon", "type": "quantitative"},
+                        "latitude": {"field": "lat", "type": "quantitative"},
+                        "text": {"field": "label", "type": "nominal"}
+                    }
+                }
+            ],
+            "config": {
+                "view": {"stroke": null},
+                "font": "Inter",
+                "background": null
+            }
+        };
+        vegaEmbed('#map-cattle-distribution', mapSpec, {"actions": false});
+
+        // --- MAP 2: Feedlot Turnoff Density ---
+        const map2Spec = {
+            "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+            "width": 620,
+            "height": 420,
+            "projection": {
+                "type": "mercator",
+                "center": [133, -27],
+                "scale": 580
+            },
+            "layer": [
+                // 1. Base Geoshape Layer with Feedlot Turnoff Choropleth Encoding
+                {
+                    "data": {
+                        "url": topoJsonUrl, 
+                        "format": {"type": "topojson", "feature": "STE_2021_AUST_GDA2020"}
+                    },
+                    "transform": [
+                        {
+                            "lookup": "properties.STE_NAME21",
+                            "from": {
+                                "data": {
+                                    "values": [
+                                        {"State Name": "Queensland", "Turnoff Volume": 365.8},
+                                        {"State Name": "New South Wales", "Turnoff Volume": 348.4},
+                                        {"State Name": "Victoria", "Turnoff Volume": 221.9},
+                                        {"State Name": "Western Australia", "Turnoff Volume": 16.9},
+                                        {"State Name": "South Australia", "Turnoff Volume": 42.21},
+                                        {"State Name": "Northern Territory", "Turnoff Volume": 0.0},
+                                        {"State Name": "Tasmania", "Turnoff Volume": 0.0}
+                                    ]
+                                },
+                                "key": "State Name",
+                                "fields": ["Turnoff Volume"]
+                            }
+                        }
+                    ],
+                    "mark": {"type": "geoshape", "stroke": "#FFFFFF", "strokeWidth": 1},
+                    "encoding": {
+                        "color": {
+                            "field": "Turnoff Volume",
+                            "type": "quantitative",
+                            "scale": {"scheme": "tealblues"},
+                            "legend": {"title": "Turnoff ('000 Head)"}
+                        },
+                        "tooltip": [
+                            {"field": "properties.STE_NAME21", "type": "nominal", "title": "State Name"},
+                            {"field": "Turnoff Volume", "type": "quantitative", "title": "Feedlot Turnoff ('000 Head)"}
+                        ]
+                    }
+                },
+                // 2. State Value Labels
+                {
+                    "data": {
+                        "values": [
+                            {"lat": -24.5, "lon": 144.0, "label": "QLD: 365.8K"},
+                            {"lat": -32.0, "lon": 147.0, "label": "NSW: 348.4K"},
+                            {"lat": -37.0, "lon": 144.5, "label": "VIC: 221.9K"},
+                            {"lat": -25.0, "lon": 122.0, "label": "WA: 16.9K"},
+                            {"lat": -30.0, "lon": 135.0, "label": "SA: 42.2K"}
+                        ]
+                    },
+                    "mark": {
+                        "type": "text", 
+                        "fontSize": 11, 
+                        "fontWeight": "600", 
+                        "fill": "#0F172A"
+                    },
+                    "encoding": {
+                        "longitude": {"field": "lon", "type": "quantitative"},
+                        "latitude": {"field": "lat", "type": "quantitative"},
+                        "text": {"field": "label", "type": "nominal"}
+                    }
+                },
+
+                // --- 3. EXPLANATORY ANNOTATION CALLOUT ---
+                // Callout Background Card
+                {
+                    "data": {
+                        "values": [{"lon": 148.5, "lat": -17.5}]
+                    },
+                    "mark": {
+                        "type": "rect",
+                        "width": 250,
+                        "height": 46,
+                        "fill": "#F0FDFA",
+                        "stroke": "#0D9488",
+                        "strokeWidth": 1.5,
+                        "cornerRadius": 4,
+                        "opacity": 0.95
+                    },
+                    "encoding": {
+                        "longitude": {"field": "lon", "type": "quantitative"},
+                        "latitude": {"field": "lat", "type": "quantitative"}
+                    }
+                },
+                // Callout Header Text
+                {
+                    "data": {
+                        "values": [{"lon": 140.0, "lat": -16.5, "label": "💡 GRAIN-FED GRAVITY CENTER"}]
+                    },
+                    "mark": {
+                        "type": "text",
+                        "fontSize": 9.5,
+                        "fontWeight": "700",
+                        "fill": "#0F766E",
+                        "align": "left",
+                        "baseline": "middle"
+                    },
+                    "encoding": {
+                        "longitude": {"field": "lon", "type": "quantitative"},
+                        "latitude": {"field": "lat", "type": "quantitative"},
+                        "text": {"field": "label", "type": "nominal"}
+                    }
+                },
+                // Callout Body Text
+                {
+                    "data": {
+                        "values": [{"lon": 140.0, "lat": -18.5, "label": "QLD & NSW command >71% of feedlot turnoff."}]
+                    },
+                    "mark": {
+                        "type": "text",
+                        "fontSize": 9,
+                        "fontWeight": "500",
+                        "fill": "#115E59",
+                        "align": "left",
+                        "baseline": "middle"
+                    },
+                    "encoding": {
+                        "longitude": {"field": "lon", "type": "quantitative"},
+                        "latitude": {"field": "lat", "type": "quantitative"},
+                        "text": {"field": "label", "type": "nominal"}
+                    }
+                }
+            ],
+            "config": {
+                "view": {"stroke": null},
+                "font": "Inter",
+                "background": null
+            }
+        };
+        vegaEmbed('#map-feedlot-turnoff', map2Spec, {"actions": false});
+
+        const stateWaffleMapSpec = {
+            "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+            "width": 800,
+            "height": 550,
+            "projection": {
+                "type": "mercator",
+                "center": [133, -27],
+                "scale": 650
+            },
+            "layer": [
+                {
+                    "data": {
+                        "url": topoJsonUrl, 
+                        "format": {"type": "topojson", "feature": "STE_2021_AUST_GDA2020"}
+                    },
+                    "mark": {"type": "geoshape", "fill": "#F8FAFC", "stroke": "#CBD5E1", "strokeWidth": 1.2}
+                },
+                {
+                    "data": {
+                        "values": [
+                            {"State": "NSW", "lon": 147.0, "lat": -32.0, "dx": -0.8, "dy": -0.8, "Species": "Lambs"},
+                            {"State": "NSW", "lon": 147.0, "lat": -32.0, "dx": 0.0, "dy": -0.8, "Species": "Lambs"},
+                            {"State": "NSW", "lon": 147.0, "lat": -32.0, "dx": 0.8, "dy": -0.8, "Species": "Lambs"},
+                            {"State": "NSW", "lon": 147.0, "lat": -32.0, "dx": -0.8, "dy": 0.0, "Species": "Lambs"},
+                            {"State": "NSW", "lon": 147.0, "lat": -32.0, "dx": 0.0, "dy": 0.0, "Species": "Lambs"},
+                            {"State": "NSW", "lon": 147.0, "lat": -32.0, "dx": 0.8, "dy": 0.0, "Species": "Sheep"},
+                            {"State": "NSW", "lon": 147.0, "lat": -32.0, "dx": -0.8, "dy": 0.8, "Species": "Sheep"},
+                            {"State": "NSW", "lon": 147.0, "lat": -32.0, "dx": 0.0, "dy": 0.8, "Species": "Sheep"},
+                            {"State": "NSW", "lon": 147.0, "lat": -32.0, "dx": 0.8, "dy": 0.8, "Species": "Cattle"},
+
+                            {"State": "QLD", "lon": 144.0, "lat": -22.5, "dx": -0.8, "dy": -0.8, "Species": "Cattle"},
+                            {"State": "QLD", "lon": 144.0, "lat": -22.5, "dx": 0.0, "dy": -0.8, "Species": "Cattle"},
+                            {"State": "QLD", "lon": 144.0, "lat": -22.5, "dx": 0.8, "dy": -0.8, "Species": "Cattle"},
+                            {"State": "QLD", "lon": 144.0, "lat": -22.5, "dx": -0.8, "dy": 0.0, "Species": "Cattle"},
+                            {"State": "QLD", "lon": 144.0, "lat": -22.5, "dx": 0.0, "dy": 0.0, "Species": "Cattle"},
+                            {"State": "QLD", "lon": 144.0, "lat": -22.5, "dx": 0.8, "dy": 0.0, "Species": "Cattle"},
+                            {"State": "QLD", "lon": 144.0, "lat": -22.5, "dx": -0.8, "dy": 0.8, "Species": "Cattle"},
+                            {"State": "QLD", "lon": 144.0, "lat": -22.5, "dx": 0.0, "dy": 0.8, "Species": "Cattle"},
+                            {"State": "QLD", "lon": 144.0, "lat": -22.5, "dx": 0.8, "dy": 0.8, "Species": "Lambs"},
+
+                            {"State": "VIC", "lon": 144.5, "lat": -37.0, "dx": -0.8, "dy": -0.8, "Species": "Lambs"},
+                            {"State": "VIC", "lon": 144.5, "lat": -37.0, "dx": 0.0, "dy": -0.8, "Species": "Lambs"},
+                            {"State": "VIC", "lon": 144.5, "lat": -37.0, "dx": 0.8, "dy": -0.8, "Species": "Lambs"},
+                            {"State": "VIC", "lon": 144.5, "lat": -37.0, "dx": -0.8, "dy": 0.0, "Species": "Lambs"},
+                            {"State": "VIC", "lon": 144.5, "lat": -37.0, "dx": 0.0, "dy": 0.0, "Species": "Lambs"},
+                            {"State": "VIC", "lon": 144.5, "lat": -37.0, "dx": 0.8, "dy": 0.0, "Species": "Lambs"},
+                            {"State": "VIC", "lon": 144.5, "lat": -37.0, "dx": -0.8, "dy": 0.8, "Species": "Lambs"},
+                            {"State": "VIC", "lon": 144.5, "lat": -37.0, "dx": 0.0, "dy": 0.8, "Species": "Sheep"},
+                            {"State": "VIC", "lon": 144.5, "lat": -37.0, "dx": 0.8, "dy": 0.8, "Species": "Cattle"},
+
+                            {"State": "SA", "lon": 135.0, "lat": -30.0, "dx": -0.8, "dy": -0.8, "Species": "Lambs"},
+                            {"State": "SA", "lon": 135.0, "lat": -30.0, "dx": 0.0, "dy": -0.8, "Species": "Lambs"},
+                            {"State": "SA", "lon": 135.0, "lat": -30.0, "dx": 0.8, "dy": -0.8, "Species": "Lambs"},
+                            {"State": "SA", "lon": 135.0, "lat": -30.0, "dx": -0.8, "dy": 0.0, "Species": "Lambs"},
+                            {"State": "SA", "lon": 135.0, "lat": -30.0, "dx": 0.0, "dy": 0.0, "Species": "Lambs"},
+                            {"State": "SA", "lon": 135.0, "lat": -30.0, "dx": 0.8, "dy": 0.0, "Species": "Lambs"},
+                            {"State": "SA", "lon": 135.0, "lat": -30.0, "dx": -0.8, "dy": 0.8, "Species": "Lambs"},
+                            {"State": "SA", "lon": 135.0, "lat": -30.0, "dx": 0.0, "dy": 0.8, "Species": "Sheep"},
+                            {"State": "SA", "lon": 135.0, "lat": -30.0, "dx": 0.8, "dy": 0.8, "Species": "Sheep"},
+
+                            {"State": "WA", "lon": 122.0, "lat": -25.0, "dx": -0.8, "dy": -0.8, "Species": "Lambs"},
+                            {"State": "WA", "lon": 122.0, "lat": -25.0, "dx": 0.0, "dy": -0.8, "Species": "Lambs"},
+                            {"State": "WA", "lon": 122.0, "lat": -25.0, "dx": 0.8, "dy": -0.8, "Species": "Lambs"},
+                            {"State": "WA", "lon": 122.0, "lat": -25.0, "dx": -0.8, "dy": 0.0, "Species": "Lambs"},
+                            {"State": "WA", "lon": 122.0, "lat": -25.0, "dx": 0.0, "dy": 0.0, "Species": "Lambs"},
+                            {"State": "WA", "lon": 122.0, "lat": -25.0, "dx": 0.8, "dy": 0.0, "Species": "Lambs"},
+                            {"State": "WA", "lon": 122.0, "lat": -25.0, "dx": -0.8, "dy": 0.8, "Species": "Sheep"},
+                            {"State": "WA", "lon": 122.0, "lat": -25.0, "dx": 0.0, "dy": 0.8, "Species": "Sheep"},
+                            {"State": "WA", "lon": 122.0, "lat": -25.0, "dx": 0.8, "dy": 0.8, "Species": "Sheep"},
+
+                            {"State": "TAS", "lon": 146.5, "lat": -42.0, "dx": -0.8, "dy": -0.8, "Species": "Lambs"},
+                            {"State": "TAS", "lon": 146.5, "lat": -42.0, "dx": 0.0, "dy": -0.8, "Species": "Lambs"},
+                            {"State": "TAS", "lon": 146.5, "lat": -42.0, "dx": 0.8, "dy": -0.8, "Species": "Lambs"},
+                            {"State": "TAS", "lon": 146.5, "lat": -42.0, "dx": -0.8, "dy": 0.0, "Species": "Lambs"},
+                            {"State": "TAS", "lon": 146.5, "lat": -42.0, "dx": 0.0, "dy": 0.0, "Species": "Sheep"},
+                            {"State": "TAS", "lon": 146.5, "lat": -42.0, "dx": 0.8, "dy": 0.0, "Species": "Sheep"},
+                            {"State": "TAS", "lon": 146.5, "lat": -42.0, "dx": -0.8, "dy": 0.8, "Species": "Sheep"},
+                            {"State": "TAS", "lon": 146.5, "lat": -42.0, "dx": 0.0, "dy": 0.8, "Species": "Cattle"},
+                            {"State": "TAS", "lon": 146.5, "lat": -42.0, "dx": 0.8, "dy": 0.8, "Species": "Cattle"}
+                        ]
+                    },
+                    "transform": [
+                        {"calculate": "datum.lon + datum.dx", "as": "adjusted_lon"},
+                        {"calculate": "datum.lat + datum.dy", "as": "adjusted_lat"}
+                    ],
+                    "mark": {
+                        "type": "point",
+                        "shape": "square",
+                        "size": 130,
+                        "filled": true,
+                        "stroke": "#FFFFFF",
+                        "strokeWidth": 1.5
+                    },
+                    "encoding": {
+                        "longitude": {"field": "adjusted_lon", "type": "quantitative"},
+                        "latitude": {"field": "adjusted_lat", "type": "quantitative"},
+                        "color": {
+                            "field": "Species",
+                            "type": "nominal",
+                            "scale": {
+                                "domain": ["Cattle", "Lambs", "Sheep"],
+                                "range": [CATEGORY_COLORS["Beef"], CATEGORY_COLORS["Lambs"], CATEGORY_COLORS["Sheep"]]
+                            },
+                            "legend": {"title": "Slaughter Species Share"}
+                        },
+                        "tooltip": [
+                            {"field": "State", "type": "nominal", "title": "State"},
+                            {"field": "Species", "type": "nominal", "title": "Species Component"}
+                        ]
+                    }
+                }
+            ],
+            "config": {
+                "view": {"stroke": null},
+                "font": "Inter",
+                "background": null
+            }
+        };
+
+        vegaEmbed('#map-waffle-container', stateWaffleMapSpec, {"actions": false});
+
+        // --- CHART 4 & 5: Quarterly Production ---
+        const chart4Spec = {
+            ...baseConfig,
+            "data": {
+                "values": [
+                    {"quarter": "2024-Q2", "Cattle (Thousand)": 2032.8, "Tonnes (Thousand)": 629.7},
+                    {"quarter": "2024-Q3", "Cattle (Thousand)": 2111.1, "Tonnes (Thousand)": 659.1},
+                    {"quarter": "2024-Q4", "Cattle (Thousand)": 2188.3, "Tonnes (Thousand)": 676.6},
+                    {"quarter": "2025-Q1", "Cattle (Thousand)": 2310.8, "Tonnes (Thousand)": 708.3},
+                    {"quarter": "2025-Q2", "Cattle (Thousand)": 2277.4, "Tonnes (Thousand)": 705.8},
+                    {"quarter": "2025-Q3", "Cattle (Thousand)": 2331.9, "Tonnes (Thousand)": 725.0},
+                    {"quarter": "2025-Q4", "Cattle (Thousand)": 2369.1, "Tonnes (Thousand)": 731.7},
+                    {"quarter": "2026-Q1", "Cattle (Thousand)": 2417.5, "Tonnes (Thousand)": 751.5},
+                    {"quarter": "2026-Q2", "Cattle (Thousand)": 2484.9, "Tonnes (Thousand)": 777.2}
+                ]
+            },
+            "layer": [
+                {
+                    "mark": {"type": "bar", "cornerRadiusEnd": 3, "color": "#CC79A7", "opacity": 0.7},
+                    "encoding": {
+                        "x": {"field": "quarter", "type": "ordinal", "axis": {"title": "Quarter", "labelAngle": -30}},
+                        "y": {
+                            "field": "Cattle (Thousand)",
+                            "type": "quantitative",
+                            "axis": {"title": "Cattle Slaughter ('000 Head)", "titleColor": "#CC79A7"}
+                        },
+                        "tooltip": [
+                            {"field": "quarter", "type": "nominal", "title": "Quarter"},
+                            {"field": "Cattle (Thousand)", "type": "quantitative", "title": "Cattle ('000 Head)"}
+                        ]
+                    }
+                },
+                {
+                   "mark": {"type": "line", "strokeWidth": 3.5, "color": CATEGORY_COLORS["Beef"], "point": {"filled": true, "fill": CATEGORY_COLORS["Beef"], "size": 50}},
+                    "encoding": {
+                        "x": {"field": "quarter", "type": "ordinal"},
+                        "y": {
+                            "field": "Tonnes (Thousand)",
+                            "type": "quantitative",
+                            "scale": {"domain": [0, 2500]},
+                            "axis": {"title": "Beef Production ('000 Tonnes)", "titleColor": CATEGORY_COLORS["Beef"], "orient": "right"}
+                        },
+                        "tooltip": [
+                            {"field": "quarter", "type": "nominal", "title": "Quarter"},
+                            {"field": "Tonnes (Thousand)", "type": "quantitative", "title": "Beef ('000 Tonnes)"}
+                        ]
+                    }
+                }
+            ],
+            "resolve": {"scale": {"y": "independent"}}
+        };
+
+        vegaEmbed('#chart-quarterly-production', chart4Spec, {"actions": false});
+
+        // --- CHART 6: Gross Value ---
+        const chart6Spec = {
+            ...baseConfig,
+            "data": {
+                "values": [
+                    {"Livestock Sector": "Cattle & Calves", "Gross Value ($B)": 17.1},
+                    {"Livestock Sector": "Milk", "Gross Value ($B)": 5.9},
+                    {"Livestock Sector": "Sheep & Lambs", "Gross Value ($B)": 5.1},
+                    {"Livestock Sector": "Poultry", "Gross Value ($B)": 4.1},
+                    {"Livestock Sector": "Wool", "Gross Value ($B)": 2.3},
+                    {"Livestock Sector": "Pigs", "Gross Value ($B)": 1.8}
+                ]
+            },
+            "layer": [
+                // Bar Layer
+                {
+                    "mark": {"type": "bar", "cornerRadiusEnd": 4},
+                    "encoding": {
+                        "y": {"field": "Livestock Sector", "type": "nominal", "sort": "-x", "axis": {"title": null}},
+                        "x": {"field": "Gross Value ($B)", "type": "quantitative", "axis": {"title": "Gross Value ($ Billions)"}},
+                        "color": {
+                            "field": "Livestock Sector",
+                            "type": "nominal",
+                            "scale": {
+                                "domain": ["Cattle & Calves", "Milk", "Sheep & Lambs", "Poultry", "Wool", "Pigs"],
+                                "range": [
+                                    CATEGORY_COLORS["Cattle & Calves"], 
+                                    CATEGORY_COLORS["Milk"], 
+                                    CATEGORY_COLORS["Sheep&Lambs"], 
+                                    CATEGORY_COLORS["Poultry"], 
+                                    CATEGORY_COLORS["Wool"], 
+                                    CATEGORY_COLORS["Pigs"]
+                                ]
+                            },
+                            "legend": null
+                        },
+                        "tooltip": [
+                            {"field": "Livestock Sector", "type": "nominal", "title": "Sector"},
+                            {"field": "Gross Value ($B)", "type": "quantitative", "title": "Gross Value ($B)"}
+                        ]
+                    }
+                },
+                // --- ANNOTATION: Value Lead Marker ---
+                {
+                    "data": {"values": [{"Livestock Sector": "Cattle & Calves", "Gross Value ($B)": 17.1, "label": "$17.1B (Nearly 3x Milk)"}]},
+                    "mark": {
+                        "type": "text",
+                        "align": "left",
+                        "dx": 8,
+                        "fontSize": 9.5,
+                        "fontWeight": "700",
+                        "fill": CATEGORY_COLORS["Cattle & Calves"]
+                    },
+                    "encoding": {
+                        "y": {"field": "Livestock Sector", "type": "nominal", "sort": "-x"},
+                        "x": {"field": "Gross Value ($B)", "type": "quantitative"},
+                        "text": {"field": "label", "type": "nominal"}
+                    }
+                }
+            ]
+        };
+
+        vegaEmbed('#chart-gross-value', chart6Spec, {"actions": false});
+
+        // --- MAP 7: Global Export Markets ---
+        const map7Spec = {
+            "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+            "width": 1000,
+            "height": 550,
+            "autosize": {"type": "fit", "contains": "padding"},
+            "projection": {
+                "type": "mercator",
+                "center": [20, 30],
+                "scale": 160
+            },
+            "layer": [
+                // 1. Base Map Layer (Geoshapes for Countries/Regions)
+                {
+                    "data": {
+                        "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/2_symbol_map/js/ne_110m_admin_0_countries.topojson",
+                        "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
+                    },
+                    "transform": [
+                        {
+                            "lookup": "properties.NAME",
+                            "from": {
+                                "data": {
+                                    "values": [
+                                        {"country": "Australia", "dest": "Australia"},
+                                        {"country": "United States of America", "dest": "USA"},
+                                        {"country": "Japan", "dest": "Japan"},
+                                        {"country": "South Korea", "dest": "South Korea"},
+                                        {"country": "Canada", "dest": "Canada"},
+                                        {"country": "Taiwan", "dest": "Taiwan"},
+                                        {"country": "Austria", "dest": "EU"},
+                                        {"country": "Belgium", "dest": "EU"},
+                                        {"country": "Bulgaria", "dest": "EU"},
+                                        {"country": "Croatia", "dest": "EU"},
+                                        {"country": "Cyprus", "dest": "EU"},
+                                        {"country": "Czechia", "dest": "EU"},
+                                        {"country": "Denmark", "dest": "EU"},
+                                        {"country": "Estonia", "dest": "EU"},
+                                        {"country": "Finland", "dest": "EU"},
+                                        {"country": "France", "dest": "EU"},
+                                        {"country": "Germany", "dest": "EU"},
+                                        {"country": "Greece", "dest": "EU"},
+                                        {"country": "Hungary", "dest": "EU"},
+                                        {"country": "Ireland", "dest": "EU"},
+                                        {"country": "Italy", "dest": "EU"},
+                                        {"country": "Latvia", "dest": "EU"},
+                                        {"country": "Lithuania", "dest": "EU"},
+                                        {"country": "Luxembourg", "dest": "EU"},
+                                        {"country": "Malta", "dest": "EU"},
+                                        {"country": "Netherlands", "dest": "EU"},
+                                        {"country": "Poland", "dest": "EU"},
+                                        {"country": "Portugal", "dest": "EU"},
+                                        {"country": "Romania", "dest": "EU"},
+                                        {"country": "Slovakia", "dest": "EU"},
+                                        {"country": "Slovenia", "dest": "EU"},
+                                        {"country": "Spain", "dest": "EU"},
+                                        {"country": "Sweden", "dest": "EU"},
+                                        {"country": "Saudi Arabia", "dest": "Middle East"},
+                                        {"country": "United Arab Emirates", "dest": "Middle East"},
+                                        {"country": "Iran", "dest": "Middle East"},
+                                        {"country": "Iraq", "dest": "Middle East"},
+                                        {"country": "Israel", "dest": "Middle East"},
+                                        {"country": "Jordan", "dest": "Middle East"},
+                                        {"country": "Kuwait", "dest": "Middle East"},
+                                        {"country": "Lebanon", "dest": "Middle East"},
+                                        {"country": "Oman", "dest": "Middle East"},
+                                        {"country": "Qatar", "dest": "Middle East"},
+                                        {"country": "Syria", "dest": "Middle East"},
+                                        {"country": "Yemen", "dest": "Middle East"},
+                                        {"country": "Bahrain", "dest": "Middle East"},
+                                        {"country": "India", "dest": "Other Asia"},
+                                        {"country": "China", "dest": "Other Asia"},
+                                        {"country": "Indonesia", "dest": "Other Asia"},
+                                        {"country": "Vietnam", "dest": "Other Asia"},
+                                        {"country": "Thailand", "dest": "Other Asia"},
+                                        {"country": "Malaysia", "dest": "Other Asia"},
+                                        {"country": "Philippines", "dest": "Other Asia"},
+                                        {"country": "Singapore", "dest": "Other Asia"},
+                                        {"country": "Pakistan", "dest": "Other Asia"},
+                                        {"country": "Bangladesh", "dest": "Other Asia"},
+                                        {"country": "Cambodia", "dest": "Other Asia"},
+                                        {"country": "Laos", "dest": "Other Asia"},
+                                        {"country": "Myanmar", "dest": "Other Asia"},
+                                        {"country": "Nepal", "dest": "Other Asia"},
+                                        {"country": "Sri Lanka", "dest": "Other Asia"}
+                                    ]
+                                },
+                                "key": "country",
+                                "fields": ["dest"]
+                            }
+                        }
+                    ],
+                    "params": [
+                        {
+                            "name": "hover",
+                            "select": {"type": "point", "on": "mouseover", "clear": "mouseout"}
+                        },
+                        {
+                            "name": "click",
+                            "select": {"type": "point", "toggle": true}
+                        }
+                    ],
+                    "mark": {"type": "geoshape", "stroke": "#CBD5E1", "strokeWidth": 1},
+                    "encoding": {
+                        "color": {
+                            "field": "dest",
+                            "type": "nominal",
+                            "scale": {
+                                "domain": ["USA", "Japan", "Other Asia", "South Korea", "Canada", "Middle East", "Taiwan", "EU", "Other Dest", "Australia"],
+                                "range": ["#E69F00", "#0284C7", "#C084FC", "#10B981", "#9A3412", "#475569", "#111827", "#D97706", "#94A3B8", "#0F172A"]
+                            },
+                            "legend": {"title": "Region"}
+                        },
+                        "opacity": {
+                            "condition": {"param": "click", "empty": true, "value": 1},
+                            "value": 0.2
+                        }
+                    }
+                },
+
+                // 2. Export Flow Curves Layer
+                {
+                    "data": {
+                        "values": [
+                            {"source": "Australia", "dest": "USA", "lon": 133.0, "lat": -25.0, "tlon": -95.7, "tlat": 37.1, "Flow (Tonnes)": 135432},
+                            {"source": "Australia", "dest": "Japan", "lon": 133.0, "lat": -25.0, "tlon": 138.3, "tlat": 36.2, "Flow (Tonnes)": 79044},
+                            {"source": "Australia", "dest": "Other Asia", "lon": 133.0, "lat": -25.0, "tlon": 101.0, "tlat": 15.9, "Flow (Tonnes)": 65379},
+                            {"source": "Australia", "dest": "South Korea", "lon": 133.0, "lat": -25.0, "tlon": 127.8, "tlat": 35.9, "Flow (Tonnes)": 64672},
+                            {"source": "Australia", "dest": "Canada", "lon": 133.0, "lat": -25.0, "tlon": -106.3, "tlat": 56.1, "Flow (Tonnes)": 18507},
+                            {"source": "Australia", "dest": "Middle East", "lon": 133.0, "lat": -25.0, "tlon": 45.0, "tlat": 24.0, "Flow (Tonnes)": 16381},
+                            {"source": "Australia", "dest": "Taiwan", "lon": 133.0, "lat": -25.0, "tlon": 120.9, "tlat": 23.7, "Flow (Tonnes)": 12623},
+                            {"source": "Australia", "dest": "EU", "lon": 133.0, "lat": -25.0, "tlon": 4.4, "tlat": 50.8, "Flow (Tonnes)": 6317}
+                        ]
+                    },
+                    "mark": {
+                        "type": "rule", 
+                        "opacity": 1, 
+                        "strokeCap": "round",
+                        "interpolate": "cardinal", 
+                        "tension": 0.5
+                    },
+                    "encoding": {
+                        "longitude": {"field": "lon", "type": "quantitative"},
+                        "latitude": {"field": "lat", "type": "quantitative"},
+                        "longitude2": {"field": "tlon", "type": "quantitative"},
+                        "latitude2": {"field": "tlat", "type": "quantitative"},
+                        "strokeWidth": {
+                            "field": "Flow (Tonnes)", 
+                            "type": "quantitative", 
+                            "scale": {"domain": [0, 140000], "range": [1.5, 8]}
+                        },
+                        "color": {
+                            "field": "dest",
+                            "type": "nominal",
+                            "scale": {
+                                "domain": ["USA", "Japan", "Other Asia", "South Korea", "Canada", "Middle East", "Taiwan", "EU", "Other Dest", "Australia"],
+                                "range": ["#E69F00", "#0284C7", "#C084FC", "#10B981", "#9A3412", "#475569", "#111827", "#D97706", "#94A3B8", "#0F172A"]
+                            },
+                            "legend": null
+                        },
+                        "tooltip": [
+                            {"field": "source", "title": "Origin"},
+                            {"field": "dest", "title": "Destination Market"},
+                            {"field": "Flow (Tonnes)", "title": "Export Volume (Tonnes)", "format": ",d"}
+                        ]
+                    }
+                },
+
+                // 3. Origin Point Layer (Australia Center)
+                {
+                    "data": {
+                        "values": [
+                            {"country": "Australia", "lon": 133.0, "lat": -25.0, "Total": 404274}
+                        ]
+                    },
+                    "mark": {"type": "circle", "fill": "#0F172A", "stroke": "#FFFFFF"},
+                    "encoding": {
+                        "longitude": {"field": "lon", "type": "quantitative"},
+                        "latitude": {"field": "lat", "type": "quantitative"},
+                        "size": {"value": 400},
+                        "tooltip": [
+                            {"field": "country", "title": "Origin Country"},
+                            {"field": "Total", "title": "Total Beef Exports (Tonnes)", "format": ",d"}
+                        ]
+                    }
+                },
+                {
+                    "data": {
+                        "values": [
+                            {"lon": 133.0, "lat": -22.0, "label": "Australia"}
+                        ]
+                    },
+                    "mark": {
+                        "dy": 10,
+                        "dx": 30,
+                        "type": "text", 
+                        "fontSize": 10, 
+                        "fontWeight": "400", 
+                        "fill": "white"
+                    },
+                    "encoding": {
+                        "longitude": {"field": "lon", "type": "quantitative"},
+                        "latitude": {"field": "lat", "type": "quantitative"},
+                        "text": {"field": "label", "type": "nominal"}
+                    }
+                },
+
+                // --- 4. EXPLANATORY ANNOTATION CALLOUT: US LARGEST EXPORT MARKET ---
+                // Callout Background Card
+                {
+                    "data": {
+                        "values": [{"lon": -95.7, "lat": 18.0}]
+                    },
+                    "mark": {
+                        "type": "rect",
+                        "width": 210,
+                        "height": 48,
+                        "fill": "#FEF3C7",
+                        "stroke": "#E69F00",
+                        "strokeWidth": 1.5,
+                        "cornerRadius": 4,
+                        "opacity": 0.95
+                    },
+                    "encoding": {
+                        "longitude": {"field": "lon", "type": "quantitative"},
+                        "latitude": {"field": "lat", "type": "quantitative"}
+                    }
+                },
+                // Callout Header Text
+                {
+                    "data": {
+                        "values": [{"lon": -132.0, "lat": 19.0, "label": "👑 #1 GLOBAL DESTINATION: USA"}]
+                    },
+                    "mark": {
+                        "type": "text",
+                        "fontSize": 9.5,
+                        "fontWeight": "700",
+                        "fill": "#92400E",
+                        "align": "left",
+                        "baseline": "middle"
+                    },
+                    "encoding": {
+                        "longitude": {"field": "lon", "type": "quantitative"},
+                        "latitude": {"field": "lat", "type": "quantitative"},
+                        "text": {"field": "label", "type": "nominal"}
+                    }
+                },
+                // Callout Body Text
+                {
+                    "data": {
+                        "values": [{"lon": -132.0, "lat": 15.5, "label": "135,432 Tonnes (33.5% of total beef exports)"}]
+                    },
+                    "mark": {
+                        "type": "text",
+                        "fontSize": 8.5,
+                        "fontWeight": "500",
+                        "fill": "#78350F",
+                        "align": "left",
+                        "baseline": "middle"
+                    },
+                    "encoding": {
+                        "longitude": {"field": "lon", "type": "quantitative"},
+                        "latitude": {"field": "lat", "type": "quantitative"},
+                        "text": {"field": "label", "type": "nominal"}
+                    }
+                }
+            ],
+            "config": {
+                "view": {"stroke": null},
+                "font": "Inter",
+                "background": null
+            }
+        };
+        vegaEmbed('#map-flow-container', map7Spec, {"actions": false});
+
+ // --- CHART 8: Export Markets Heatmap ---
+        const heatmapSpec = {
+            "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+            "width": 650,
+            "height": 350,
+            "data": {
+                "values": [
+                    {"State": "NSW", "Destination": "EU", "Percentage": 2},
+                    {"State": "NSW", "Destination": "USA", "Percentage": 37},
+                    {"State": "NSW", "Destination": "Canada", "Percentage": 4},
+                    {"State": "NSW", "Destination": "Japan", "Percentage": 35},
+                    {"State": "NSW", "Destination": "South Korea", "Percentage": 16},
+                    {"State": "NSW", "Destination": "Taiwan", "Percentage": 4},
+                    {"State": "NSW", "Destination": "Other Asia", "Percentage": 31},
+                    {"State": "NSW", "Destination": "Middle East", "Percentage": 7},
+                    {"State": "NSW", "Destination": "Other Dest", "Percentage": 3},
+
+                    {"State": "VIC", "Destination": "EU", "Percentage": 0},
+                    {"State": "VIC", "Destination": "USA", "Percentage": 47},
+                    {"State": "VIC", "Destination": "Canada", "Percentage": 3},
+                    {"State": "VIC", "Destination": "Japan", "Percentage": 25},
+                    {"State": "VIC", "Destination": "South Korea", "Percentage": 21},
+                    {"State": "VIC", "Destination": "Taiwan", "Percentage": 3},
+                    {"State": "VIC", "Destination": "Other Asia", "Percentage": 35},
+                    {"State": "VIC", "Destination": "Middle East", "Percentage": 9},
+                    {"State": "VIC", "Destination": "Other Dest", "Percentage": 4},
+
+                    {"State": "QLD", "Destination": "EU", "Percentage": 2},
+                    {"State": "QLD", "Destination": "USA", "Percentage": 26},
+                    {"State": "QLD", "Destination": "Canada", "Percentage": 9},
+                    {"State": "QLD", "Destination": "Japan", "Percentage": 31},
+                    {"State": "QLD", "Destination": "South Korea", "Percentage": 29},
+                    {"State": "QLD", "Destination": "Taiwan", "Percentage": 6},
+                    {"State": "QLD", "Destination": "Other Asia", "Percentage": 18},
+                    {"State": "QLD", "Destination": "Middle East", "Percentage": 6},
+                    {"State": "QLD", "Destination": "Other Dest", "Percentage": 2},
+
+                    {"State": "SA", "Destination": "EU", "Percentage": 1},
+                    {"State": "SA", "Destination": "USA", "Percentage": 54},
+                    {"State": "SA", "Destination": "Canada", "Percentage": 16},
+                    {"State": "SA", "Destination": "Japan", "Percentage": 26},
+                    {"State": "SA", "Destination": "South Korea", "Percentage": 20},
+                    {"State": "SA", "Destination": "Taiwan", "Percentage": 5},
+                    {"State": "SA", "Destination": "Other Asia", "Percentage": 25},
+                    {"State": "SA", "Destination": "Middle East", "Percentage": 8},
+                    {"State": "SA", "Destination": "Other Dest", "Percentage": 1},
+
+                    {"State": "WA", "Destination": "EU", "Percentage": 0},
+                    {"State": "WA", "Destination": "USA", "Percentage": 14},
+                    {"State": "WA", "Destination": "Canada", "Percentage": 0},
+                    {"State": "WA", "Destination": "Japan", "Percentage": 22},
+                    {"State": "WA", "Destination": "South Korea", "Percentage": 10},
+                    {"State": "WA", "Destination": "Taiwan", "Percentage": 5},
+                    {"State": "WA", "Destination": "Other Asia", "Percentage": 56},
+                    {"State": "WA", "Destination": "Middle East", "Percentage": 2},
+                    {"State": "WA", "Destination": "Other Dest", "Percentage": 5},
+
+                    {"State": "TAS", "Destination": "EU", "Percentage": 0},
+                    {"State": "TAS", "Destination": "USA", "Percentage": 55},
+                    {"State": "TAS", "Destination": "Canada", "Percentage": 10},
+                    {"State": "TAS", "Destination": "Japan", "Percentage": 35},
+                    {"State": "TAS", "Destination": "South Korea", "Percentage": 27},
+                    {"State": "TAS", "Destination": "Taiwan", "Percentage": 1},
+                    {"State": "TAS", "Destination": "Other Asia", "Percentage": 20},
+                    {"State": "TAS", "Destination": "Middle East", "Percentage": 6},
+                    {"State": "TAS", "Destination": "Other Dest", "Percentage": 1},
+
+                    {"State": "NT", "Destination": "EU", "Percentage": 0},
+                    {"State": "NT", "Destination": "USA", "Percentage": 66},
+                    {"State": "NT", "Destination": "Canada", "Percentage": 0},
+                    {"State": "NT", "Destination": "Japan", "Percentage": 0},
+                    {"State": "NT", "Destination": "South Korea", "Percentage": 14},
+                    {"State": "NT", "Destination": "Taiwan", "Percentage": 0},
+                    {"State": "NT", "Destination": "Other Asia", "Percentage": 81},
+                    {"State": "NT", "Destination": "Middle East", "Percentage": 0},
+                    {"State": "NT", "Destination": "Other Dest", "Percentage": 5}
+                ]
+            },
+            "layer": [
+                {
+                    "mark": {"type": "rect", "cornerRadius": 2},
+                    "encoding": {
+                        "x": {
+                            "field": "Destination",
+                            "type": "nominal",
+                            "sort": ["EU", "USA", "Canada", "Japan", "South Korea", "Taiwan", "Other Asia", "Middle East", "Other Dest"],
+                            "axis": {"title": null, "labelAngle": -30}
+                        },
+                        "y": {
+                            "field": "State",
+                            "type": "nominal",
+                            "sort": ["QLD", "VIC", "NSW", "SA", "WA", "TAS", "NT"],
+                            "axis": {"title": null}
+                        },
+                        "color": {
+                            "field": "Percentage",
+                            "type": "quantitative",
+                            "scale": {"scheme": "blues"},
+                            "legend": {"title": "Share (%)"}
+                        },
+                        "tooltip": [
+                            {"field": "State", "type": "nominal", "title": "Origin State"},
+                            {"field": "Destination", "type": "nominal", "title": "Destination Market"},
+                            {"field": "Percentage", "type": "quantitative", "title": "Proportion (%)", "format": ",d"}
+                        ]
+                    }
+                },
+                {
+                    "mark": {
+                        "type": "text",
+                        "fontSize": 10,
+                        "fontWeight": "600"
+                    },
+                    "encoding": {
+                        "x": {
+                            "field": "Destination",
+                            "type": "nominal",
+                            "sort": ["EU", "USA", "Canada", "Japan", "South Korea", "Taiwan", "Other Asia", "Middle East", "Other Dest"]
+                        },
+                        "y": {
+                            "field": "State",
+                            "type": "nominal",
+                            "sort": ["QLD", "VIC", "NSW", "SA", "WA", "TAS", "NT"]
+                        },
+                        "text": {
+                            "field": "Percentage",
+                            "type": "quantitative",
+                            "format": "d"
+                        },
+                        "color": {
+                            "condition": {
+                                "test": "datum.Percentage > 40",
+                                "value": "#FFFFFF"
+                            },
+                            "value": "#1E293B"
+                        }
+                    }
+                },
+                {
+                    "data": {
+                        "values": [
+                            {"State": "QLD", "Destination": "EU"},
+                            {"State": "NT", "Destination": "USA"},
+                            {"State": "SA", "Destination": "Canada"},
+                            {"State": "NSW", "Destination": "Japan"},
+                            {"State": "QLD", "Destination": "South Korea"},
+                            {"State": "QLD", "Destination": "Taiwan"},
+                            {"State": "NT", "Destination": "Other Asia"},
+                            {"State": "VIC", "Destination": "Middle East"},
+                            {"State": "WA", "Destination": "Other Dest"}
+                        ]
+                    },
+                    "mark": {
+                        "type": "rect", 
+                        "fill": null, 
+                        "stroke": "orange", 
+                        "strokeWidth": 2.5, 
+                        "cornerRadius": 2
+                    },
+                    "encoding": {
+                        "x": {
+                            "field": "Destination",
+                            "type": "nominal",
+                            "sort": ["EU", "USA", "Canada", "Japan", "South Korea", "Taiwan", "Other Asia", "Middle East", "Other Dest"]
+                        },
+                        "y": {
+                            "field": "State",
+                            "type": "nominal",
+                            "sort": ["QLD", "VIC", "NSW", "SA", "WA", "TAS", "NT"]
+                        }
+                    }
+                }
+            ],
+            "config": {
+                "view": {"stroke": null},
+                "font": "Inter",
+                "background": null
+            }
+        };
+
+        vegaEmbed('#chart-export-markets', heatmapSpec, {"actions": false});
+
+        // --- CHART 9: Waffle Chart ---
+        const waffleSpec = {
+            "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+            "width": 350,
+            "height": 350,
+            "data": {
+                "values": [
+                    {"sq": 0, "row": 0, "col": 0, "Category": "Beef / Veal", "Percentage": 65.65},
+                    {"sq": 1, "row": 0, "col": 1, "Category": "Beef / Veal", "Percentage": 65.65},
+                    {"sq": 2, "row": 0, "col": 2, "Category": "Beef / Veal", "Percentage": 65.65},
+                    {"sq": 3, "row": 0, "col": 3, "Category": "Beef / Veal", "Percentage": 65.65},
+                    {"sq": 4, "row": 0, "col": 4, "Category": "Beef / Veal", "Percentage": 65.65},
+                    {"sq": 5, "row": 0, "col": 5, "Category": "Beef / Veal", "Percentage": 65.65},
+                    {"sq": 6, "row": 0, "col": 6, "Category": "Beef / Veal", "Percentage": 65.65},
+                    {"sq": 7, "row": 0, "col": 7, "Category": "Beef / Veal", "Percentage": 65.65},
+                    {"sq": 8, "row": 0, "col": 8, "Category": "Beef / Veal", "Percentage": 65.65},
+                    {"sq": 9, "row": 0, "col": 9, "Category": "Beef / Veal", "Percentage": 65.65},
+
+                    {"sq": 10, "row": 1, "col": 0, "Category": "Beef / Veal", "Percentage": 65.65},
+                    {"sq": 11, "row": 1, "col": 1, "Category": "Beef / Veal", "Percentage": 65.65},
+                    {"sq": 12, "row": 1, "col": 2, "Category": "Beef / Veal", "Percentage": 65.65},
+                    {"sq": 13, "row": 1, "col": 3, "Category": "Beef / Veal", "Percentage": 65.65},
+                    {"sq": 14, "row": 1, "col": 4, "Category": "Beef / Veal", "Percentage": 65.65},
+                    {"sq": 15, "row": 1, "col": 5, "Category": "Beef / Veal", "Percentage": 65.65},
+                    {"sq": 16, "row": 1, "col": 6, "Category": "Beef / Veal", "Percentage": 65.65},
+                    {"sq": 17, "row": 1, "col": 7, "Category": "Beef / Veal", "Percentage": 65.65},
+                    {"sq": 18, "row": 1, "col": 8, "Category": "Beef / Veal", "Percentage": 65.65},
+                    {"sq": 19, "row": 1, "col": 9, "Category": "Beef / Veal", "Percentage": 65.65},
+
+                    {"sq": 20, "row": 2, "col": 0, "Category": "Beef / Veal", "Percentage": 65.65},
+                    {"sq": 21, "row": 2, "col": 1, "Category": "Beef / Veal", "Percentage": 65.65},
+                    {"sq": 22, "row": 2, "col": 2, "Category": "Beef / Veal", "Percentage": 65.65},
+                    {"sq": 23, "row": 2, "col": 3, "Category": "Beef / Veal", "Percentage": 65.65},
+                    {"sq": 24, "row": 2, "col": 4, "Category": "Beef / Veal", "Percentage": 65.65},
+                    {"sq": 25, "row": 2, "col": 5, "Category": "Beef / Veal", "Percentage": 65.65},
+                    {"sq": 26, "row": 2, "col": 6, "Category": "Beef / Veal", "Percentage": 65.65},
+                    {"sq": 27, "row": 2, "col": 7, "Category": "Beef / Veal", "Percentage": 65.65},
+                    {"sq": 28, "row": 2, "col": 8, "Category": "Beef / Veal", "Percentage": 65.65},
+                    {"sq": 29, "row": 2, "col": 9, "Category": "Beef / Veal", "Percentage": 65.65},
+
+                    {"sq": 30, "row": 3, "col": 0, "Category": "Beef / Veal", "Percentage": 65.65},
+                    {"sq": 31, "row": 3, "col": 1, "Category": "Beef / Veal", "Percentage": 65.65},
+                    {"sq": 32, "row": 3, "col": 2, "Category": "Beef / Veal", "Percentage": 65.65},
+                    {"sq": 33, "row": 3, "col": 3, "Category": "Beef / Veal", "Percentage": 65.65},
+                    {"sq": 34, "row": 3, "col": 4, "Category": "Beef / Veal", "Percentage": 65.65},
+                    {"sq": 35, "row": 3, "col": 5, "Category": "Beef / Veal", "Percentage": 65.65},
+                    {"sq": 36, "row": 3, "col": 6, "Category": "Beef / Veal", "Percentage": 65.65},
+                    {"sq": 37, "row": 3, "col": 7, "Category": "Beef / Veal", "Percentage": 65.65},
+                    {"sq": 38, "row": 3, "col": 8, "Category": "Beef / Veal", "Percentage": 65.65},
+                    {"sq": 39, "row": 3, "col": 9, "Category": "Beef / Veal", "Percentage": 65.65},
+
+                    {"sq": 40, "row": 4, "col": 0, "Category": "Beef / Veal", "Percentage": 65.65},
+                    {"sq": 41, "row": 4, "col": 1, "Category": "Beef / Veal", "Percentage": 65.65},
+                    {"sq": 42, "row": 4, "col": 2, "Category": "Beef / Veal", "Percentage": 65.65},
+                    {"sq": 43, "row": 4, "col": 3, "Category": "Beef / Veal", "Percentage": 65.65},
+                    {"sq": 44, "row": 4, "col": 4, "Category": "Beef / Veal", "Percentage": 65.65},
+                    {"sq": 45, "row": 4, "col": 5, "Category": "Beef / Veal", "Percentage": 65.65},
+                    {"sq": 46, "row": 4, "col": 6, "Category": "Beef / Veal", "Percentage": 65.65},
+                    {"sq": 47, "row": 4, "col": 7, "Category": "Beef / Veal", "Percentage": 65.65},
+                    {"sq": 48, "row": 4, "col": 8, "Category": "Beef / Veal", "Percentage": 65.65},
+                    {"sq": 49, "row": 4, "col": 9, "Category": "Beef / Veal", "Percentage": 65.65},
+
+                    {"sq": 50, "row": 5, "col": 0, "Category": "Beef / Veal", "Percentage": 65.65},
+                    {"sq": 51, "row": 5, "col": 1, "Category": "Beef / Veal", "Percentage": 65.65},
+                    {"sq": 52, "row": 5, "col": 2, "Category": "Beef / Veal", "Percentage": 65.65},
+                    {"sq": 53, "row": 5, "col": 3, "Category": "Beef / Veal", "Percentage": 65.65},
+                    {"sq": 54, "row": 5, "col": 4, "Category": "Beef / Veal", "Percentage": 65.65},
+                    {"sq": 55, "row": 5, "col": 5, "Category": "Beef / Veal", "Percentage": 65.65},
+                    {"sq": 56, "row": 5, "col": 6, "Category": "Beef / Veal", "Percentage": 65.65},
+                    {"sq": 57, "row": 5, "col": 7, "Category": "Beef / Veal", "Percentage": 65.65},
+                    {"sq": 58, "row": 5, "col": 8, "Category": "Beef / Veal", "Percentage": 65.65},
+                    {"sq": 59, "row": 5, "col": 9, "Category": "Beef / Veal", "Percentage": 65.65},
+
+                    {"sq": 60, "row": 6, "col": 0, "Category": "Beef / Veal", "Percentage": 65.65},
+                    {"sq": 61, "row": 6, "col": 1, "Category": "Beef / Veal", "Percentage": 65.65},
+                    {"sq": 62, "row": 6, "col": 2, "Category": "Beef / Veal", "Percentage": 65.65},
+                    {"sq": 63, "row": 6, "col": 3, "Category": "Beef / Veal", "Percentage": 65.65},
+                    {"sq": 64, "row": 6, "col": 4, "Category": "Beef / Veal", "Percentage": 65.65},
+                    {"sq": 65, "row": 6, "col": 5, "Category": "Beef / Veal", "Percentage": 65.65},
+                    {"sq": 66, "row": 6, "col": 6, "Category": "Lamb", "Percentage": 12.43},
+                    {"sq": 67, "row": 6, "col": 7, "Category": "Lamb", "Percentage": 12.43},
+                    {"sq": 68, "row": 6, "col": 8, "Category": "Lamb", "Percentage": 12.43},
+                    {"sq": 69, "row": 6, "col": 9, "Category": "Lamb", "Percentage": 12.43},
+
+                    {"sq": 70, "row": 7, "col": 0, "Category": "Lamb", "Percentage": 12.43},
+                    {"sq": 71, "row": 7, "col": 1, "Category": "Lamb", "Percentage": 12.43},
+                    {"sq": 72, "row": 7, "col": 2, "Category": "Lamb", "Percentage": 12.43},
+                    {"sq": 73, "row": 7, "col": 3, "Category": "Lamb", "Percentage": 12.43},
+                    {"sq": 74, "row": 7, "col": 4, "Category": "Lamb", "Percentage": 12.43},
+                    {"sq": 75, "row": 7, "col": 5, "Category": "Lamb", "Percentage": 12.43},
+                    {"sq": 76, "row": 7, "col": 6, "Category": "Lamb", "Percentage": 12.43},
+                    {"sq": 77, "row": 7, "col": 7, "Category": "Lamb", "Percentage": 12.43},
+                    {"sq": 78, "row": 7, "col": 8, "Category": "Fancy Meat", "Percentage": 10.99},
+                    {"sq": 79, "row": 7, "col": 9, "Category": "Fancy Meat", "Percentage": 10.99},
+
+                    {"sq": 80, "row": 8, "col": 0, "Category": "Fancy Meat", "Percentage": 10.99},
+                    {"sq": 81, "row": 8, "col": 1, "Category": "Fancy Meat", "Percentage": 10.99},
+                    {"sq": 82, "row": 8, "col": 2, "Category": "Fancy Meat", "Percentage": 10.99},
+                    {"sq": 83, "row": 8, "col": 3, "Category": "Fancy Meat", "Percentage": 10.99},
+                    {"sq": 84, "row": 8, "col": 4, "Category": "Fancy Meat", "Percentage": 10.99},
+                    {"sq": 85, "row": 8, "col": 5, "Category": "Fancy Meat", "Percentage": 10.99},
+                    {"sq": 86, "row": 8, "col": 6, "Category": "Fancy Meat", "Percentage": 10.99},
+                    {"sq": 87, "row": 8, "col": 7, "Category": "Fancy Meat", "Percentage": 10.99},
+                    {"sq": 88, "row": 8, "col": 8, "Category": "Fancy Meat", "Percentage": 10.99},
+                    {"sq": 89, "row": 8, "col": 9, "Category": "Mutton", "Percentage": 6.94},
+
+                    {"sq": 90, "row": 9, "col": 0, "Category": "Mutton", "Percentage": 6.94},
+                    {"sq": 91, "row": 9, "col": 1, "Category": "Mutton", "Percentage": 6.94},
+                    {"sq": 92, "row": 9, "col": 2, "Category": "Mutton", "Percentage": 6.94},
+                    {"sq": 93, "row": 9, "col": 3, "Category": "Mutton", "Percentage": 6.94},
+                    {"sq": 94, "row": 9, "col": 4, "Category": "Mutton", "Percentage": 6.94},
+                    {"sq": 95, "row": 9, "col": 5, "Category": "Mutton", "Percentage": 6.94},
+                    {"sq": 96, "row": 9, "col": 6, "Category": "Goat", "Percentage": 2.54},
+                    {"sq": 97, "row": 9, "col": 7, "Category": "Goat", "Percentage": 2.54},
+                    {"sq": 98, "row": 9, "col": 8, "Category": "Goat", "Percentage": 2.54},
+                    {"sq": 99, "row": 9, "col": 9, "Category": "Pork", "Percentage": 1.45}
+                ]
+            },
+            "mark": {
+                "type": "rect",
+                "width": 28,
+                "height": 28,
+                "cornerRadius": 3,
+                "stroke": "#FFFFFF",
+                "strokeWidth": 2
+            },
+            "encoding": {
+                "x": {
+                    "field": "col",
+                    "type": "ordinal",
+                    "axis": null
+                },
+                "y": {
+                    "field": "row",
+                    "type": "ordinal",
+                    "sort": "descending",
+                    "axis": null
+                },
+                "color": {
+                    "field": "Category",
+                    "type": "nominal",
+                    "scale": {
+                       "domain": ["Beef / Veal", "Lamb", "Fancy Meat", "Mutton", "Pork", "Goat"],
+                        "range": [CATEGORY_COLORS["Beef"], CATEGORY_COLORS["Lamb"], CATEGORY_COLORS["Fancy Meat"], CATEGORY_COLORS["Mutton"], CATEGORY_COLORS["Pork"], CATEGORY_COLORS["Goat"]]
+                    },
+                    "legend": {"title": "Meat Category"}
+                },
+                "tooltip": [
+                    {"field": "Category", "type": "nominal", "title": "Category"},
+                    {"field": "Percentage", "type": "quantitative", "title": "Total Share (%)", "format": ".1f"}
+                ]
+            },
+            "config": {
+                "view": {"stroke": null},
+                "font": "Inter",
+                "background": null
+            }
+        };
+
+        vegaEmbed('#waffle-container', waffleSpec, {"actions": false});
+
+        // --- CHART 10: Retail Prices Dumbbell Plot ---
+        const dumbbellPlotSpec = {
+            "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+            "width": 650,
+            "height": 300,
+            "data": {
+                "values": [
+                    {"FiscalYear": "2025", "Category": "Beef", "AverageValue": 2652.97},
+                    {"FiscalYear": "2026", "Category": "Beef", "AverageValue": 2891.77},
+                    {"FiscalYear": "2025", "Category": "Chicken", "AverageValue": 660.74},
+                    {"FiscalYear": "2026", "Category": "Chicken", "AverageValue": 659.89},
+                    {"FiscalYear": "2025", "Category": "Lamb", "AverageValue": 1933.09},
+                    {"FiscalYear": "2026", "Category": "Lamb", "AverageValue": 2153.66},
+                    {"FiscalYear": "2025", "Category": "Pork", "AverageValue": 1507.68},
+                    {"FiscalYear": "2026", "Category": "Pork", "AverageValue": 1513.81}
+                ]
+            },
+            "transform": [
+                {
+                    "joinaggregate": [
+                        {"op": "min", "field": "AverageValue", "as": "x_start"},
+                        {"op": "max", "field": "AverageValue", "as": "x_end"}
+                    ],
+                    "groupby": ["Category"]
+                }
+            ],
+            "layer": [
+                {
+                    "mark": {"type": "rule", "stroke": "#0F172A", "strokeWidth": 1.5},
+                    "encoding": {
+                        "y": {
+                            "field": "Category",
+                            "type": "nominal",
+                            "sort": "-x",
+                            "axis": {"title": "Category", "labelFontSize": 12, "labelFontWeight": "bold"}
+                        },
+                        "x": {
+                            "field": "x_start",
+                            "type": "quantitative",
+                            "scale": {"zero": false},
+                            "axis": {"title": "Average Retail Price (AUD c/kg)", "format": ",.0f"}
+                        },
+                        "x2": {"field": "x_end"}
+                    }
+                },
+                {
+                    "mark": {"type": "circle", "size": 180, "filled": true, "stroke": "#FFFFFF", "strokeWidth": 1},
+                    "encoding": {
+                        "y": {
+                            "field": "Category",
+                            "type": "nominal",
+                            "sort": "-x"
+                        },
+                        "x": {
+                            "field": "AverageValue",
+                            "type": "quantitative"
+                        },
+                        "color": {
+                            "field": "FiscalYear",
+                            "type": "nominal",
+                            "scale": {
+                                "domain": ["2025", "2026"],
+                                "range": ["#2563EB", "#DC2626"]
+                            },
+                            "legend": {"title": "Fiscal Year"}
+                        },
+                        "tooltip": [
+                            {"field": "Category", "type": "nominal", "title": "Category"},
+                            {"field": "FiscalYear", "type": "nominal", "title": "Fiscal Year"},
+                            {"field": "AverageValue", "type": "quantitative", "title": "Average Value (AUD c/kg)", "format": ",.2f"}
+                        ]
+                    }
+                }
+            ],
+            "config": {
+                "view": {"stroke": null},
+                "font": "Inter",
+                "background": "#F1F5F9"
+            }
+        };
+
+        vegaEmbed('#dotplot-container', dumbbellPlotSpec, {"actions": false});
+
+        // --- CHART 11: Pasture Biomass Impact ---
+        const pastureSpec = {
+            ...baseConfig,
+            "data": {
+                "values": [
+                    {"biomass": 20, "turnoff": 1.2}, {"biomass": 35, "turnoff": 1.8},
+                    {"biomass": 50, "turnoff": 2.5}, {"biomass": 65, "turnoff": 3.1},
+                    {"biomass": 80, "turnoff": 4.0}, {"biomass": 95, "turnoff": 4.8}
+                ]
+            },
+            "mark": {"type": "point", "filled": true, "size": 100},
+            "encoding": {
+                "x": {"field": "biomass", "type": "quantitative", "axis": {"title": "Pasture Biomass Index"}},
+                "y": {"field": "turnoff", "type": "quantitative", "axis": {"title": "Cattle Turnoff Volume (M Head)"}},
+                "color": {"value": "#D97706"}
+            }
+        };
+        vegaEmbed('#chart-pasture-impact', pastureSpec, {"actions": false});
+
+        // --- Meat Consumption per Capita Bar Chart ---
+        const meatConsumptionSpec = {
+            "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+            "width": 380,
+            "height": 220,
+            "data": {
+                "values": [
+                    {"Category": "Chicken", "Percentage": 38, "kg": 53.77},
+                    {"Category": "Seafood", "Percentage": 20, "kg": 28.30},
+                    {"Category": "Beef", "Percentage": 19, "kg": 26.89},
+                    {"Category": "Pork", "Percentage": 18, "kg": 25.47},
+                    {"Category": "Lamb", "Percentage": 5, "kg": 7.08}
+                ]
+            },
+            "mark": {
+                "type": "bar",
+                "cornerRadiusEnd": 4
+            },
+            "encoding": {
+                "y": {
+                    "field": "Category",
+                    "type": "nominal",
+                    "sort": "-x",
+                    "axis": {"title": null, "labelFontSize": 11}
+                },
+                "x": {
+                    "field": "Percentage",
+                    "type": "quantitative",
+                    "scale": {"domain": [0, 45]},
+                    "axis": {"title": "Share of Per Capita Consumption (%)"}
+                },
+                "color": {
+                    "field": "Category",
+                    "type": "nominal",
+                    "scale": {
+                        "domain": ["Chicken", "Seafood", "Beef", "Pork", "Lamb"],
+                        "range": ["#86D3E3", "#B0B5B9", "#007A43", "#E88A85", "#FFC000"]
+                    },
+                    "legend": null
+                },
+                "tooltip": [
+                    {"field": "Category", "type": "nominal", "title": "Meat Category"},
+                    {"field": "Percentage", "type": "quantitative", "title": "Share (%)", "format": ".0f"},
+                    {"field": "kg", "type": "quantitative", "title": "Per Capita (kg)", "format": ".2f"}
+                ]
+            },
+            "config": {
+                "view": {"stroke": null},
+                "font": "Inter",
+                "background": "transparent"
+            }
+        };
+
+        vegaEmbed('#chart-live-export', meatConsumptionSpec, {"actions": false});
+
+    </script>
+</body>
+</html>
