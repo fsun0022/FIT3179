@@ -344,6 +344,22 @@
             </div>
         </div>
 
+        <!-- CHART 12: Retail Fresh Meat Value Share -->
+        <div class="row-section">
+            <div class="row-text">
+                <div class="section-tag">Chapter XI: Market Share & Expenditure</div>
+                <h2>Beef Retains High-Value Retail Leadership</h2>
+                <p class="narrative">
+                    In terms of domestic dollar spending, <strong>Beef retains the largest share of retail fresh meat value at 35% (-0.2% change)</strong>. While chicken leads overall volume consumption, it holds second place in total market expenditure at <strong>28% (+1.5% growth)</strong>. Pork (12%), Lamb (11%), Seafood (10%), and Other fresh meat (3%) account for the remaining retail spend.
+                </p>
+            </div>
+            <div class="row-chart">
+                <div id="chart-value-share"></div>
+                <div class="chart-caption"><strong>Chart 12 (Bar Chart):</strong> 2024 retail fresh meat value share (%) and share-point percentage change.</div>
+                <div class="data-source-label">Source: Meat & Livestock Australia (MLA) Snapshot</div>
+            </div>
+        </div>
+
     </div>
 
     <footer>
@@ -1755,6 +1771,97 @@
         };
 
         vegaEmbed('#chart-live-export', meatConsumptionSpec, {"actions": false});
+
+        const valueShareSpec = {
+            "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+            "width": 380,
+            "height": 240,
+            "data": {
+                "values": [
+                    {"Category": "Beef", "Share": 35, "Change": -0.2},
+                    {"Category": "Chicken", "Share": 28, "Change": 1.5},
+                    {"Category": "Pork", "Share": 12, "Change": -0.3},
+                    {"Category": "Lamb", "Share": 11, "Change": -0.7},
+                    {"Category": "Seafood", "Share": 10, "Change": -0.3},
+                    {"Category": "Other fresh meat", "Share": 3, "Change": 0.1}
+                ]
+            },
+            "layer": [
+                {
+                    "mark": {
+                        "type": "bar",
+                        "cornerRadiusEnd": 4
+                    },
+                    "encoding": {
+                        "y": {
+                            "field": "Category",
+                            "type": "nominal",
+                            "sort": "-x",
+                            "axis": {"title": null, "labelFontSize": 11}
+                        },
+                        "x": {
+                            "field": "Share",
+                            "type": "quantitative",
+                            "scale": {"domain": [0, 40]},
+                            "axis": {"title": "Retail Value Share (%)"}
+                        },
+                        "color": {
+                            "field": "Category",
+                            "type": "nominal",
+                            "scale": {
+                                "domain": ["Beef", "Chicken", "Pork", "Lamb", "Seafood", "Other fresh meat"],
+                                "range": ["#057A55", "#76A9FA", "#F05252", "#FF5A1F", "#9CA3AF", "#E5D5ED"]
+                            },
+                            "legend": null
+                        },
+                        "tooltip": [
+                            {"field": "Category", "type": "nominal", "title": "Category"},
+                            {"field": "Share", "type": "quantitative", "title": "2024 Value Share (%)", "format": ".0f"},
+                            {"field": "Change", "type": "quantitative", "title": "Share Point % Change", "format": "+.1f"}
+                        ]
+                    }
+                },
+                {
+                    "mark": {
+                        "type": "text",
+                        "align": "left",
+                        "dx": 6,
+                        "fontSize": 10,
+                        "fontWeight": "600",
+                        "fill": "#374151"
+                    },
+                    "encoding": {
+                        "y": {
+                            "field": "Category",
+                            "type": "nominal",
+                            "sort": "-x"
+                        },
+                        "x": {
+                            "field": "Share",
+                            "type": "quantitative"
+                        },
+                        "text": {
+                            "condition": {
+                                "test": "datum.Change > 0",
+                                "field": "Share",
+                                "type": "nominal",
+                                "format": ".0f"
+                            },
+                            "field": "Share",
+                            "type": "nominal",
+                            "format": ".0f"
+                        }
+                    }
+                }
+            ],
+            "config": {
+                "view": {"stroke": null},
+                "font": "Inter",
+                "background": "transparent"
+            }
+        };
+
+        vegaEmbed('#chart-value-share', valueShareSpec, {"actions": false});
 
     </script>
 </body>
